@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./facility-detail.component.scss']
 })
 export class FacilityDetailComponent implements OnInit {
-  activeState: boolean[] = [true, false, false];
+  activeState: boolean[] = [true, true, true];
 
   constructor() { }
 

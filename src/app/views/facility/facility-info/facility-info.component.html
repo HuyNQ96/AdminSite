@@ -1,17 +1,39 @@
 <p-tabView [(activeIndex)]="index">
-    <p-tabPanel header=" Cấu trúc hạn mức đề xuất">
-        Cấu trúc hạn mức đề xuất
+    <p-tabPanel header=" Cấu trúc hạn mức đề xuất" (click)="OnchangeIndexTab(0)">
         <div *ngIf="index===0">
+            <div style="text-align: right;">
+                <button type="button" label="Sửa" class="p-element p-ripple p-button-raised p-button-info p-button-text p-button p-component">
+                    <span class="p-button-label">Sửa</span>
+                    <span class="p-ink"></span>
+                </button>
+                <button type="button" label="Xóa" class="p-element p-ripple p-button-raised p-button-danger p-button-text p-button p-component">
+                    <span class="p-button-label">Xóa</span>
+                    <span class="p-ink"></span>
+                </button>
+            </div>
             <app-facility-list></app-facility-list>
         </div>
     </p-tabPanel>
     <p-tabPanel header="Hạn mức 1" (click)="OnchangeIndexTab(1)">
         <div *ngIf="index===1">
+            <div style="text-align: right;">
+                <button type="button" label="Sửa" class="p-element p-ripple p-button-raised p-button-info p-button-text p-button p-component">
+                    <span class="p-button-label">Sửa</span>
+                    <span class="p-ink"></span>
+                </button>
+            </div>
             <app-facility-detail></app-facility-detail>
         </div>
     </p-tabPanel>
     <p-tabPanel header="Hạn mức 2" (click)="OnchangeIndexTab(2)">
         <div *ngIf="index===2">
+            <div style="text-align: right;">
+                <button type="button" label="Sửa" class="p-element p-ripple p-button-raised p-button-info p-button-text p-button p-component">
+                    <span class="p-button-label">Sửa</span>
+                    <span class="p-ink"></span>
+                </button>
+            </div>
+            <app-facility-detail></app-facility-detail>
         </div>
     </p-tabPanel>
 </p-tabView>

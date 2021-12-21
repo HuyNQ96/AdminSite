@@ -17,6 +17,7 @@ export class AppComponent {
         $(this).toggleClass('active');
       });
     });
+    this.OnChangeMainTab();
   }
   
   public OnChangeMainTab() {

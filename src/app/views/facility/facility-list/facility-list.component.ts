@@ -1,59 +1,81 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { MessageService } from "primeng/api";
-import { Customer, Representative } from 'src/app/models/custom.model';
-import { CustomerService } from 'src/app/services/CustomerService/customer.service';
+import { Component, OnInit } from '@angular/core';
+import { LazyLoadEvent } from 'primeng/api';
+import { PrimeNGConfig } from 'primeng/api';
+import { Customer } from 'src/app/models/custom.model';
+import { UserModel } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/UserService/user.service';
 
 @Component({
   selector: 'app-facility-list',
   templateUrl: './facility-list.component.html',
-  styleUrls: ['./facility-list.component.scss'],
-  providers: [MessageService]
+  styleUrls: ['./facility-list.component.scss']
 })
+
 export class FacilityListComponent implements OnInit {
-  public customers: Customer[] = [];
+  datasource: UserModel[] = [];
 
-  public representatives: Representative[] = [];
+  totalRecords: number = 0;
 
-  public statuses: any[] = [];
+  cols: any[] = [];
 
-  loading: boolean = true;
+  loading: boolean = false;
 
-  activityValues: number[] = [0, 100];
+  row = 0;
+  first = 0;
+  public lstUser: UserModel[] = [];
+  selectAll: boolean = false;
 
-  constructor(private customerService: CustomerService) {
+  selectedUsers: UserModel[] = [];
 
-  }
+  constructor(private userService: UserService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit() {
-    this.customerService.getCustomersLarge().then(customers => {
-      this.customers = customers;
-      this.loading = false;
-
-      this.customers.forEach(
-        customer => (customer.date = new Date(customer.date))
-      );
+    this.userService.getListUser().subscribe(data => {
+      console.log('lstUser: ', data);
+      this.datasource = data;
+      this.totalRecords = data.length;
     });
 
-    this.representatives = [
-      { name: "Amy Elsner", image: "amyelsner.png" },
-      { name: "Anna Fali", image: "annafali.png" },
-      { name: "Asiya Javayant", image: "asiyajavayant.png" },
-      { name: "Bernardo Dominic", image: "bernardodominic.png" },
-      { name: "Elwin Sharvill", image: "elwinsharvill.png" },
-      { name: "Ioni Bowcher", image: "ionibowcher.png" },
-      { name: "Ivan Magalhaes", image: "ivanmagalhaes.png" },
-      { name: "Onyama Limba", image: "onyamalimba.png" },
-      { name: "Stephen Shaw", image: "stephenshaw.png" },
-      { name: "XuXue Feng", image: "xuxuefeng.png" }
-    ];
-
-    this.statuses = [
-      { label: "Unqualified", value: "unqualified" },
-      { label: "Qualified", value: "qualified" },
-      { label: "New", value: "new" },
-      { label: "Negotiation", value: "negotiation" },
-      { label: "Renewal", value: "renewal" },
-      { label: "Proposal", value: "proposal" }
-    ];
+    console.log('data', this.datasource);
+    console.log('length', this.totalRecords);
+    this.loading = true;
+    this.primengConfig.ripple = true;
   }
+
+  loadCustomers(event: LazyLoadEvent) {
+    this.loading = true;
+    setTimeout(() => {
+      if (this.datasource) {
+        if (event !== null) {
+          this.row = event.rows ? event.rows : 0;
+          this.first = event.first ? event.first : 0;
+          this.lstUser = this.datasource.slice(event.first, (this.first + this.row));
+          this.loading = false;
+        }
+      }
+    }, 1000);
+  }
+
+  onSelectionChange(value = []) {
+    this.selectAll = value.length === this.totalRecords;
+    this.selectedUsers = value;
+  }
+
+  onSelectAllChange(event:any) {
+    const checked = event.checked;
+
+    if (checked) {
+      this.userService.getListUser().subscribe(data => {
+        console.log('lstUser: ', data);
+        this.selectedUsers = data;
+        this.selectAll = true;
+      });
+
+    }
+    else {
+      this.selectedUsers = [];
+      this.selectAll = false;
+    }
+  }
+
 }
