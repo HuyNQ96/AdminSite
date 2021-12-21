@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,21 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'AdminSite';
+  constructor() {
+
+  }
+  ngOnInit() {
+    $(document).ready(function () {
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $(this).toggleClass('active');
+      });
+    });
+  }
+  
+  public OnChangeMainTab() {
+    $("#MainMenuLeft li a").click(function () {
+      $(this).parent().addClass('active').siblings().removeClass('active');
+    });
+  }
 }
