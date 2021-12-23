@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { PrimeNGConfig } from 'primeng/api';
-import { Customer } from 'src/app/models/custom.model';
 import { UserModel } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/UserService/user.service';
 

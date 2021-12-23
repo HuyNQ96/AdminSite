@@ -17,8 +17,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { SliderModule } from 'primeng/slider';
-import {InputTextModule} from 'primeng/inputtext';
-import {InputTextareaModule} from 'primeng/inputtextarea';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FieldsetModule } from 'primeng/fieldset';
 
 // Connection
 import { HttpClientModule } from '@angular/common/http';
@@ -66,7 +67,8 @@ import { CustomerInfoComponent } from './views/customer/customer-info/customer-i
     SliderModule,
     InputTextModule,
     InputTextareaModule,
-    FormsModule
+    FormsModule,
+    FieldsetModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],

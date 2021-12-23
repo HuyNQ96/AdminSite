@@ -1,0 +1,19 @@
+.table-header th {
+    background-color: #bcbdf9;
+}
+.container {
+    display: flex;
+}
+label,
+span,
+td,
+th,
+li {
+    font-size: 14px;
+}
+.col-6 {
+    padding: 0.2rem !important;
+}
+.p-accordion .p-accordion-content {
+    padding: 0.5rem;
+}
