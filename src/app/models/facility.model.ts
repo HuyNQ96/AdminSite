@@ -1,3 +1,5 @@
+import { CustomFieldModel } from "./customfield";
+
 export interface FacilityModel {
     ID: number;
     APPROVAL_STATUS: string;
@@ -53,4 +55,5 @@ export interface FacilityModel {
     FIRST_DISBURSEMENT_UNIT: string;
     DEBT_ACK_TENOR_UNIT: string;
     MAX_DISBURSEMENT_AMT: number;
+    ListCustomField: CustomFieldModel[];
 }

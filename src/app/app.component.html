@@ -6,14 +6,14 @@
     </div>
 
     <ul class="list-unstyled components" id="MainMenuLeft">
-      <li class="active" (click)="OnChangeMainTab()">
-        <a routerLink="/carinfo" routerLinkActive="active">1. Thông tin hồ sơ</a>
+      <li class="active" (click)="OnChangeMainTab('MainTab')">
+        <a>1. Thông tin hồ sơ</a>
       </li>
-      <li (click)="OnChangeMainTab()">
-        <a routerLink="/facinfo" routerLinkActive="active">2. Khách hàng</a>
+      <li (click)="OnChangeMainTab('CustomerTab')">
+        <a>2. Khách hàng</a>
       </li>
-      <li (click)="OnChangeMainTab()">
-        <a href="#">3. Thông tin hạn mức</a>
+      <li (click)="OnChangeMainTab('FacilityTab')">
+        <a>3. Thông tin hạn mức</a>
       </li>
     </ul>
   </nav>
@@ -35,8 +35,21 @@
     <div style="text-align: right;">
       <app-button-bar></app-button-bar>
     </div>
-    <router-outlet></router-outlet>
+    
+    <div *ngIf="activeMainTab==='MainTab'">
+        <app-car-info></app-car-info>
+    </div>
+    
+    <div *ngIf="activeMainTab==='CustomerTab'">
+        <app-customer-info></app-customer-info>
+    </div>
+    
+    <div *ngIf="activeMainTab==='FacilityTab'">
+        <app-facility-info></app-facility-info>
+    </div>
+
+    <!-- <router-outlet>
+    </router-outlet> -->
     
   </div>
 </div>
-

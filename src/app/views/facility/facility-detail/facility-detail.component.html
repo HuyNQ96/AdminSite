@@ -1,16 +1,32 @@
 <p-accordion>
     <p-accordionTab header="Thông tin hạn mức" [(selected)]="activeState[0]">
-        <div class="p-col-12">
-            <div class="p-col-6">
-                <div class="p-col-4">
-                    <p>Mã hồ sơ</p>
+        <div class="card">
+            <h5>Inline</h5>
+            <div class="p-formgroup-inline">
+                <div class="p-field">
+                    <label for="firstname5" class="p-sr-only">Firstname</label>
+                    <input id="firstname5" type="text" pInputText placeholder="Firstname" />
                 </div>
-                <div class="p-col-8">
-                    <p>CAR.29112021.02102728</p>
+                <div class="p-field">
+                    <label for="lastname5" class="p-sr-only">Lastname</label>
+                    <input id="lastname5" type="text" pInputText placeholder="Lastname" />
                 </div>
+                <button pButton pRipple type="button" label="Submit"></button>
             </div>
-            <div class="p-col-6">
-
+        </div>
+        <div _ngcontent-itn-c67="" class="card">
+            <h5 _ngcontent-itn-c67="">Horizontal and Fluid</h5>
+            <div _ngcontent-itn-c67="" class="p-fluid">
+                <div _ngcontent-itn-c67="" class="p-field p-grid"><label _ngcontent-itn-c67="" for="firstname4"
+                        class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Firstname</label>
+                    <div _ngcontent-itn-c67="" class="p-col-12 p-md-10"><input _ngcontent-itn-c67="" id="firstname4"
+                            type="text" pinputtext="" class="p-inputtext p-component p-element"></div>
+                </div>
+                <div _ngcontent-itn-c67="" class="p-field p-grid"><label _ngcontent-itn-c67="" for="lastname4"
+                        class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Lastname</label>
+                    <div _ngcontent-itn-c67="" class="p-col-12 p-md-10"><input _ngcontent-itn-c67="" id="lastname4"
+                            type="text" pinputtext="" class="p-inputtext p-component p-element"></div>
+                </div>
             </div>
         </div>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore

@@ -2,6 +2,7 @@ import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/cor
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
 
 
 // PrimeNG Library
@@ -16,6 +17,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { DropdownModule } from 'primeng/dropdown';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { SliderModule } from 'primeng/slider';
+import {InputTextModule} from 'primeng/inputtext';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 
 // Connection
 import { HttpClientModule } from '@angular/common/http';
@@ -29,6 +32,7 @@ import { FacilityDetailComponent } from './views/facility/facility-detail/facili
 import { AppComponent } from './app.component';
 import { DetailUserComponent } from './views/user/detail-user/detail-user.component';
 import { ListUserComponent } from './views/user/list-user/list-user.component';
+import { CustomerInfoComponent } from './views/customer/customer-info/customer-info.component';
 
 @NgModule({
   // Component
@@ -40,7 +44,8 @@ import { ListUserComponent } from './views/user/list-user/list-user.component';
     FacilityInfoComponent,
     FacilityListComponent,
     FacilityDetailComponent,
-    ListUserComponent
+    ListUserComponent,
+    CustomerInfoComponent
   ],
   // Module
   imports: [
@@ -59,6 +64,9 @@ import { ListUserComponent } from './views/user/list-user/list-user.component';
     DropdownModule,
     ProgressBarModule,
     SliderModule,
+    InputTextModule,
+    InputTextareaModule,
+    FormsModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
