@@ -9,6 +9,7 @@ import * as $ from 'jquery';
 })
 export class AppComponent {
   activeMainTab = "MainTab";
+  customerId: number = 0;
   constructor() {
   }
   ngOnInit() {
@@ -20,6 +21,9 @@ export class AppComponent {
       });
     });
     this.OnChangeMainTab('MainTab');
+
+    // Lấy thông tin CAR
+
   }
 
   public OnChangeMainTab(tabName:string = '') {

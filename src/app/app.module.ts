@@ -34,6 +34,7 @@ import { AppComponent } from './app.component';
 import { DetailUserComponent } from './views/user/detail-user/detail-user.component';
 import { ListUserComponent } from './views/user/list-user/list-user.component';
 import { CustomerInfoComponent } from './views/customer/customer-info/customer-info.component';
+import { CustomerSearchComponent } from './views/customer/customer-search/customer-search.component';
 
 @NgModule({
   // Component
@@ -46,7 +47,8 @@ import { CustomerInfoComponent } from './views/customer/customer-info/customer-i
     FacilityListComponent,
     FacilityDetailComponent,
     ListUserComponent,
-    CustomerInfoComponent
+    CustomerInfoComponent,
+    CustomerSearchComponent
   ],
   // Module
   imports: [

@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { REST_TEST_API } from 'src/app/constants/api.constants';
-import { CustomerCategoryModel } from 'src/app/models/custom.model';
+import { CustomerCategoryModel } from 'src/app/models/customer.model';
 
 @Injectable({
   providedIn: 'root'

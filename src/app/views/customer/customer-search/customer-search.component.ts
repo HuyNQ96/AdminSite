@@ -6,11 +6,11 @@ import { CustomerService } from 'src/app/services/CustomerService/customer.servi
 import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
 
 @Component({
-  selector: 'app-customer-info',
-  templateUrl: './customer-info.component.html',
-  styleUrls: ['./customer-info.component.scss']
+  selector: 'app-customer-search',
+  templateUrl: './customer-search.component.html',
+  styleUrls: ['./customer-search.component.scss']
 })
-export class CustomerInfoComponent implements OnInit {
+export class CustomerSearchComponent implements OnInit {
   index: number = 0;
   rows = 0;
   first = 0;

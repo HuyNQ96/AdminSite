@@ -39,7 +39,8 @@
     </div>
     
     <div *ngIf="activeMainTab==='CustomerTab'">
-        <app-customer-info></app-customer-info>
+      <app-customer-info *ngIf="customerId>0"></app-customer-info>
+      <app-customer-search *ngIf="customerId===0"></app-customer-search>
     </div>
     
     <div *ngIf="activeMainTab==='FacilityTab'">

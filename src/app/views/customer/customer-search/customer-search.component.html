@@ -1,0 +1,113 @@
+<p-accordion [(activeIndex)]="index">
+    <p-accordionTab header="Thêm mới khách hàng">
+        <div class="grid">
+            <div class="col-6">
+                <label class="col-4 p-text-bold" for="customerNumberSearch">Mã khách hàng</label>
+                <input class="col-6 p-inputtext-sm" id="customerNumberSearch" type="text" pInputText
+                    placeholder="Nhập mã khách hàng" [(ngModel)]="customerNumberSearch" />
+            </div>
+            <div class="col-6">
+                <label class="col-4 p-text-bold" for="customerNameSearch">Tên khách hàng</label>
+                <input class="col-6 p-inputtext-sm" id="customerNameSearch" type="text" pInputText
+                    placeholder="Nhập tên khách hàng" [(ngModel)]="customerNameSearch" />
+            </div>
+            <div class="col-6">
+                <label class="col-4 p-text-bold" for="departmentSearch">Phân nhóm khách hàng</label>
+                <p-dropdown class="p-inputtext-sm dropdown-full" id="departmentSearch" [options]="lstCustCat"
+                    [(ngModel)]="selectedCustCat" optionLabel="CUST_CAT_FULL_NAME" [filter]="true"
+                    filterBy="CUST_CAT_FULL_NAME" [showClear]="true" placeholder="Chọn phân nhóm khác hàng">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="custcat-item custcat-item-value" *ngIf="selectedCustCat">
+                            <div>{{selectedCustCat.CUST_CAT_FULL_NAME}}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-custCat pTemplate="item">
+                        <div class="custcat-item">
+                            <div>{{custCat.CUST_CAT_FULL_NAME}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+            <div class="col-6">
+                <label class="col-4 p-text-bold" for="departmentSearch">Đơn vị/Chi nhánh</label>
+                <p-dropdown class="p-inputtext-sm dropdown-full" id="departmentSearch" [options]="lstDepartment"
+                    [(ngModel)]="selectedDepartment" optionLabel="DEPT_FULL_NAME" [filter]="true"
+                    filterBy="DEPT_FULL_NAME" [showClear]="true" placeholder="Chọn đơn vị/chi nhánh">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="department-item department-item-value" *ngIf="selectedDepartment">
+                            <div>{{selectedDepartment.DEPT_FULL_NAME}}</div>
+                        </div>
+                    </ng-template>
+                    <ng-template let-department pTemplate="item">
+                        <div class="department-item">
+                            <div>{{department.DEPT_FULL_NAME}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+            <div class="col-6">
+                <label class="col-4 p-text-bold" for="customerIdNumberSearch">Mã số định danh KH</label>
+                <input class="col-6 p-inputtext-sm" id="customerIdNumberSearch" type="text" pInputText
+                    placeholder="Nhập mã số định danh KH" [(ngModel)]="customerIdNumberSearch" />
+            </div>
+            <div class="col-6">
+                <label class="col-4 p-text-bold" for="customerCIFSearch">Số CIF</label>
+                <input class="col-6 p-inputtext-sm" id="customerCIFSearch" type="text" pInputText
+                    placeholder="Nhập số CIF khách hàng" [(ngModel)]="customerCIFSearch" />
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <section class="content">
+                <button (click)="OnclickSearchCustomer()" type="button" label="Tìm kiếm" class="p-element p-ripple p-button-success p-button p-component">
+                    <span class="p-button-label">Tìm kiếm</span>
+                    <span class="p-ink"></span>
+                </button>
+                <button (click)="OnclickClearFormSearchCustomer()" type="button" label="Thay đổi điều kiện"
+                    class="p-element p-ripple p-button-info p-button p-component" style="margin-left: 5px;">
+                    <span class="p-button-label">Thay đổi điều kiện</span>
+                    <span class="p-ink"></span>
+                </button>
+            </section>
+        </div>
+    </p-accordionTab>
+</p-accordion>
+<br>
+
+<div class="card">
+    <p-table [value]="lstCustomer" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-sm" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Mã khách hàng</th>
+                <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Tên khách hàng</th>
+                <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Mã số định danh KH</th>
+                <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Số CIF</th>
+                <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Phân nhóm khách hàng</th>
+                <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Đơn vị/Chi nhánh</th>
+                <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Hạn chế tín dụng</th>
+                <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Chức năng</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-customer>
+            <tr>
+                <td>{{customer.CUSTOMER_NUMBER}}</td>
+                <td>{{customer.CUSTOMER_NAME}}</td>
+                <td>{{customer.CUSTOMER_IDENTITY}}</td> 
+                <td>{{customer.CUSTOMER_CIF}}</td>
+                <td>{{customer.CUSTOMER_CAT}}</td>
+                <td>{{customer.CUSTOMER_DEPT}}</td>
+                <td>{{customer.CUSTOMER_EX}}</td>
+                <td>
+                    <button *ngIf="customer.ID%2" pButton type="button" label="Thêm" class="p-button-sm"></button>
+                    <button *ngIf="!(customer.ID%2)" pButton type="button" label="Y/C sử dụng TTKH" class="p-button-sm p-button-success"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<style>
+    #departmentSearch div {
+        width: 50% !important;
+    }
+</style>
