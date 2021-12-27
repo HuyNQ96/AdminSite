@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CustomerCategoryModel, CustomerModel } from 'src/app/models/customer.model';
 import { DepartmentModel } from 'src/app/models/department.model';
 import { CustomerCategoryService } from 'src/app/services/CustomerService/customer-category.service';
@@ -11,11 +11,14 @@ import { DepartmentService } from 'src/app/services/DepartmentService/department
   styleUrls: ['./customer-search.component.scss']
 })
 export class CustomerSearchComponent implements OnInit {
+  @Output() onClickAddCustomerEvent = new EventEmitter<any>();
+
+
   index: number = 0;
   rows = 0;
   first = 0;
 
-  public lstCustomer: CustomerModel[] = [];
+  lstCustomer: CustomerModel[] = [];
 
   resultCount: number = 0;
 
@@ -42,6 +45,10 @@ export class CustomerSearchComponent implements OnInit {
   ) {
 
   }
+  onClickAddCustomer(customerId:number) {
+    this.onClickAddCustomerEvent.emit({ customerId });
+  }
+
   ngOnInit() {
     // Dropdown CustCat
     this.customerCategoryService.getListCustCat().subscribe((data: CustomerCategoryModel[]) => {

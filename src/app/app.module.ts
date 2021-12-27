@@ -20,6 +20,8 @@ import { SliderModule } from 'primeng/slider';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FieldsetModule } from 'primeng/fieldset';
+import { PanelModule } from 'primeng/panel';
+import { CalendarModule } from 'primeng/calendar';
 
 // Connection
 import { HttpClientModule } from '@angular/common/http';
@@ -70,7 +72,9 @@ import { CustomerSearchComponent } from './views/customer/customer-search/custom
     InputTextModule,
     InputTextareaModule,
     FormsModule,
-    FieldsetModule
+    FieldsetModule,
+    PanelModule,
+    CalendarModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],

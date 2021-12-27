@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import * as $ from 'jquery';
+import { CarModel } from './models/car.model';
 
 
 @Component({
@@ -9,9 +10,19 @@ import * as $ from 'jquery';
 })
 export class AppComponent {
   activeMainTab = "MainTab";
+
   customerId: number = 0;
+
+  carInfo: any; // CarModel
+
   constructor() {
   }
+  // Hàm check sự kiện thêm customer vào hồ sơ tại component Search Customer
+  changeCustomerInfo(value: any) {
+    console.log("CustomerId = ", value.customerId);
+    this.customerId = value.customerId;
+  }
+
   ngOnInit() {
     // Action cho LeftMenu
     $(document).ready(function () {
@@ -26,7 +37,7 @@ export class AppComponent {
 
   }
 
-  public OnChangeMainTab(tabName:string = '') {
+  public OnChangeMainTab(tabName: string = '') {
     $("#MainMenuLeft li a").click(function () {
       $(this).parent().addClass('active').siblings().removeClass('active');
     });

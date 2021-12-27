@@ -99,7 +99,7 @@
                 <td>{{customer.CUSTOMER_DEPT}}</td>
                 <td>{{customer.CUSTOMER_EX}}</td>
                 <td>
-                    <button *ngIf="customer.ID%2" pButton type="button" label="Thêm" class="p-button-sm"></button>
+                    <button *ngIf="customer.ID%2" pButton type="button" label="Thêm" class="p-button-sm" (click)="onClickAddCustomer(customer.ID)"></button>
                     <button *ngIf="!(customer.ID%2)" pButton type="button" label="Y/C sử dụng TTKH" class="p-button-sm p-button-success"></button>
                 </td>
             </tr>

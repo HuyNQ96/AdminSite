@@ -35,12 +35,12 @@
       <app-button-bar></app-button-bar>
     </div>
     <div *ngIf="activeMainTab==='MainTab'">
-        <app-car-info></app-car-info>
+      <router-outlet></router-outlet>
     </div>
     
     <div *ngIf="activeMainTab==='CustomerTab'">
       <app-customer-info *ngIf="customerId>0"></app-customer-info>
-      <app-customer-search *ngIf="customerId===0"></app-customer-search>
+      <app-customer-search *ngIf="customerId===0" (onClickAddCustomerEvent)="changeCustomerInfo($event)"></app-customer-search>
     </div>
     
     <div *ngIf="activeMainTab==='FacilityTab'">
