@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import * as $ from 'jquery';
-import { CarModel } from './models/car.model';
 
 
 @Component({
@@ -13,14 +12,18 @@ export class AppComponent {
 
   customerId: number = 0;
 
-  carInfo: any; // CarModel
-
   constructor() {
   }
   // Hàm check sự kiện thêm customer vào hồ sơ tại component Search Customer
   changeCustomerInfo(value: any) {
-    console.log("CustomerId = ", value.customerId);
+    console.log("CustomerId1111 = ", value.customerId);
     this.customerId = value.customerId;
+  }
+
+  // Hàm check sự kiện init customer khi mở màn hình
+  initCustomerInfo(value: any) {
+    console.log("CustomerId sau khi lấy danh sách = ", value.CustomerId);
+    this.customerId = value.CustomerId;
   }
 
   ngOnInit() {
@@ -32,7 +35,6 @@ export class AppComponent {
       });
     });
     this.OnChangeMainTab('MainTab');
-
     // Lấy thông tin CAR
 
   }

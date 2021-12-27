@@ -1,146 +1,52 @@
-
-<p-panel header="Thông tin hồ sơ">
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Mã hồ sơ</label>
+<div class="wrapper">
+  <!-- Sidebar Holder -->
+  <nav id="sidebar">
+    <div class="sidebar-header" style="border-bottom: 1px solid #4b545c;text-align: center;">
+      <h5 style="margin-bottom: 0px;"><i class="pi pi-user" style="font-size: 1.2rem"></i> 310CVKH01</h5>
     </div>
-    <div class="col-10">
-      <p class=" p-inputtext-sm">CAR.24122021.02103335</p>
+
+    <ul class="list-unstyled components" id="MainMenuLeft">
+      <li class="active" (click)="OnChangeMainTab('MainTab')">
+        <a>1. Thông tin hồ sơ</a>
+      </li>
+      <li (click)="OnChangeMainTab('CustomerTab')">
+        <a>2. Khách hàng</a>
+      </li>
+      <li (click)="OnChangeMainTab('FacilityTab')">
+        <a>3. Thông tin hạn mức</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Page Content Holder -->
+  <div id="content" style="width: 100%;">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" id="sidebarCollapse" class="navbar-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <div style="text-align: right;margin-bottom: 10px;">
+      <app-button-bar></app-button-bar>
+    </div>
+    <div *ngIf="activeMainTab==='MainTab'">
+      <app-car-detail></app-car-detail>
+      <!-- <router-outlet></router-outlet> -->
+    </div>
+    
+    <div *ngIf="activeMainTab==='CustomerTab'">
+      <app-customer-info *ngIf="customerId>0"></app-customer-info>
+      <app-customer-search *ngIf="customerId===0">
+      </app-customer-search>
+    </div>
+    
+    <div *ngIf="activeMainTab==='FacilityTab'">
+      <app-facility-info></app-facility-info>
     </div>
   </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Tên khách hàng</label>
-    </div>
-    <div class="col-10">
-      <p class=" p-inputtext-sm">Huy Nguyễn</p>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Đơn vị/Chi nhánh</label>
-    </div>
-    <div class="col-10">
-      <p class=" p-inputtext-sm">CN Quảng Ninh</p>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Ngày trình hồ sơ</label>
-    </div>
-    <div class="col-10">
-      <p class=" p-inputtext-sm"></p>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Cấp phê duyệt</label>
-    </div>
-    <div class="col-10">
-      <p class=" p-inputtext-sm"></p>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Ngày phê duyệt</label>
-    </div>
-    <div class="col-10">
-      <p class=" p-inputtext-sm"></p>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Số HĐTD</label>
-    </div>
-    <div class="col-10">
-      <input class="p-inputtext-sm" type="text" pInputText placeholder="Nhập Số HĐTD" />
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Ngày kí HĐTD</label>
-    </div>
-    <div class="col-10 p-field">   
-        <p-calendar [style]="{'width':'50%'}" [(ngModel)]="contractDate" [showIcon]="true" inputId="icon"></p-calendar>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Loại hồ sơ</label>
-    </div>
-    <div class="col-10">
-      <p class=" p-inputtext-sm">CAR.24122021.02103335</p>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Số thông báo cấp tín dụng</label>
-    </div>
-    <div class="col-10">
-      <input class="p-inputtext-sm" type="text" pInputText placeholder="Nhập Số thông báo cấp tín dụng" />
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Ngày thông báo cấp tín dụng</label>
-    </div>
-    <div class="col-10">
-      <p class=" p-inputtext-sm">CAR.24122021.02103335</p>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Hồ sơ nhận nợ bắt buộc</label>
-    </div>
-    <div class="col-10">
-      <p class=" p-inputtext-sm">CAR.24122021.02103335</p>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Mã SLA - ĐVKD</label>
-    </div>
-    <div class="col-10">
-      <p class=" p-inputtext-sm">CAR.24122021.02103335</p>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Mã SLA - TĐPD</label>
-    </div>
-    <div class="col-10">
-      <p class=" p-inputtext-sm">CAR.24122021.02103335</p>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Mã SLA - Pháp chế</label>
-    </div>
-    <div class="col-10">
-      <p class=" p-inputtext-sm">CAR.24122021.02103335</p>
-    </div>
-  </div>
-
-  <div class="grid">
-    <div class="col-2">
-      <label class="p-text-bold">Khoản cấp TD có ủy quyền riêng cho BTD</label>
-    </div>
-    <div class="col-10">
-      <p class=" p-inputtext-sm">CAR.24122021.02103335</p>
-    </div>
-  </div>
-</p-panel>
+</div>

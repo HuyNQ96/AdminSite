@@ -12,8 +12,7 @@ import { DepartmentService } from 'src/app/services/DepartmentService/department
 })
 export class CustomerSearchComponent implements OnInit {
   @Output() onClickAddCustomerEvent = new EventEmitter<any>();
-
-
+  
   index: number = 0;
   rows = 0;
   first = 0;

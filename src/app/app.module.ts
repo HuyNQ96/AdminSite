@@ -37,6 +37,7 @@ import { DetailUserComponent } from './views/user/detail-user/detail-user.compon
 import { ListUserComponent } from './views/user/list-user/list-user.component';
 import { CustomerInfoComponent } from './views/customer/customer-info/customer-info.component';
 import { CustomerSearchComponent } from './views/customer/customer-search/customer-search.component';
+import { CarDetailComponent } from './views/car/car-detail/car-detail.component';
 
 @NgModule({
   // Component
@@ -50,7 +51,8 @@ import { CustomerSearchComponent } from './views/customer/customer-search/custom
     FacilityDetailComponent,
     ListUserComponent,
     CustomerInfoComponent,
-    CustomerSearchComponent
+    CustomerSearchComponent,
+    CarDetailComponent
   ],
   // Module
   imports: [
