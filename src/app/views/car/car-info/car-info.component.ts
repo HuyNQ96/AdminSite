@@ -15,6 +15,8 @@ export class CarInfoComponent implements OnInit {
   customerId: number = 0;
   carInfo = {} as CarModel;
 
+  isActive: boolean = false;
+
   activeMainTab: string = 'MainTab';
   constructor(private route: ActivatedRoute, private carService: CarService) {
   }
@@ -38,9 +40,13 @@ export class CarInfoComponent implements OnInit {
     this.carService.getCarDetail(this.applicationCode).subscribe((data: CarModel) => {
       this.carInfo = data;
       this.customerId = data.CUSTOMER_ID;
-      console.log('Car Info: ', this.carInfo.CUSTOMER_ID);
+      console.log('Customer ID: ', this.carInfo.CUSTOMER_ID);
+      console.log('Car ID: ', this.carInfo.ID);
     });
 
+  }
+  OnclickShowMenu(){
+    this.isActive = !this.isActive;
   }
 
   public OnChangeMainTab(tabName: string = '') {

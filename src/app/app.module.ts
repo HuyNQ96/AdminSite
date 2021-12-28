@@ -22,6 +22,10 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { FieldsetModule } from 'primeng/fieldset';
 import { PanelModule } from 'primeng/panel';
 import { CalendarModule } from 'primeng/calendar';
+import { SplitButtonModule } from 'primeng/splitbutton';
+import { ToastModule } from 'primeng/toast';
+import { DialogModule } from 'primeng/dialog';
+import {SelectButtonModule} from 'primeng/selectbutton';
 
 // Connection
 import { HttpClientModule } from '@angular/common/http';
@@ -76,7 +80,11 @@ import { CarDetailComponent } from './views/car/car-detail/car-detail.component'
     FormsModule,
     FieldsetModule,
     PanelModule,
-    CalendarModule
+    CalendarModule,
+    SplitButtonModule,
+    ToastModule,
+    DialogModule,
+    SelectButtonModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
