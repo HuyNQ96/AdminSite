@@ -25,8 +25,8 @@ import { CalendarModule } from 'primeng/calendar';
 import { SplitButtonModule } from 'primeng/splitbutton';
 import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
-import {SelectButtonModule} from 'primeng/selectbutton';
-
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 // Connection
 import { HttpClientModule } from '@angular/common/http';
 
@@ -42,6 +42,7 @@ import { ListUserComponent } from './views/user/list-user/list-user.component';
 import { CustomerInfoComponent } from './views/customer/customer-info/customer-info.component';
 import { CustomerSearchComponent } from './views/customer/customer-search/customer-search.component';
 import { CarDetailComponent } from './views/car/car-detail/car-detail.component';
+import { CustomerMainInfoComponent } from './views/customer/customer-info/customer-main-info/customer-main-info/customer-main-info.component';
 
 @NgModule({
   // Component
@@ -56,7 +57,8 @@ import { CarDetailComponent } from './views/car/car-detail/car-detail.component'
     ListUserComponent,
     CustomerInfoComponent,
     CustomerSearchComponent,
-    CarDetailComponent
+    CarDetailComponent,
+    CustomerMainInfoComponent
   ],
   // Module
   imports: [
@@ -84,7 +86,8 @@ import { CarDetailComponent } from './views/car/car-detail/car-detail.component'
     SplitButtonModule,
     ToastModule,
     DialogModule,
-    SelectButtonModule
+    SelectButtonModule,
+    ConfirmDialogModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],

@@ -48,7 +48,7 @@
 
     <div *ngIf="customerId>0">
       <div *ngIf="activeMainTab==='MainTab'">
-        <app-car-detail></app-car-detail>
+        <app-car-detail [carViewModel]="this.carInfo"></app-car-detail>
         <!-- <router-outlet></router-outlet> -->
       </div>
   

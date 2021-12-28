@@ -1,7 +1,28 @@
+<div style="text-align: right;padding-bottom: 5px;">
+    <button type="button" label="Sửa"
+        class="p-element p-ripple p-button-raised p-button-info p-button-text p-button p-component">
+        <span class="p-button-label">Sửa</span>
+        <span class="p-ink"></span>
+    </button>
+    <button type="button" label="Xóa" (click)="confirmDeleteFacility()"
+        class="p-element p-ripple p-button-raised p-button-danger p-button-text p-button p-component">
+        <span class="p-button-label">Xóa</span>
+        <span class="p-ink"></span>
+    </button>
+    <p-splitButton [style]="{'padding-left':'5px'}" class="p-button-sm" label="Thêm hạn mức" icon="pi pi-plus"
+        [model]="items"></p-splitButton>
+</div>
+<p-toast></p-toast>
+<p-confirmDialog
+  [style]="{ width: '50vw' }"
+  [baseZIndex]="10000"
+></p-confirmDialog>
+
 <div class="card">
     <p-table [value]="lstFacility" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-sm" responsiveLayout="scroll">
+        [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-sm" responsiveLayout="scroll" selectionMode="single"
+        [(selection)]="facActive" dataKey="FACILITY_CODE">
         <ng-template pTemplate="header">
             <tr>
                 <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Mã Facility</th>
@@ -9,20 +30,136 @@
                 <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Số tiền cấp tín dụng</th>
                 <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Số tiền cấp tín dụng không TSBĐ</th>
                 <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Sản phẩm tín dụng</th>
-                <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Thời hạn cấp  tín dụng</th>
+                <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Thời hạn cấp tín dụng</th>
                 <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Tính chất hạn mức</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-fac>
-            <tr>
+            <tr [pSelectableRow]="fac">
                 <td>{{fac.FACILITY_CODE}}</td>
                 <td>{{fac.FACILITY_DESC}}</td>
-                <td>{{fac.FACILITY_LIMIT}}</td> 
+                <td>{{fac.FACILITY_LIMIT}}</td>
                 <td>{{fac.SECURE_LIMIT}}</td>
                 <td>{{fac.PRODUCT_NAME}}</td>
                 <td>{{fac.SUBMIT_TENOR}}</td>
-                <td>{{fac.STATUS}}</td> 
+                <td>{{fac.STATUS}}</td>
             </tr>
         </ng-template>
     </p-table>
 </div>
+
+
+<p-dialog header="Thêm hạn mức tổng hợp" [(visible)]="displayModalGeneral" [modal]="true"
+    [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <p-panel header="Thông tin hạn mức">
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Mã Facility</label>
+            </div>
+            <div class="col-9">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" [(ngModel)]="createFac.FACILITY_CODE" pInputText disabled/>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Loại hình cấp tín dụng</label>
+            </div>
+            <div class="col-9">
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="currencys"
+                 [(ngModel)]="createFac.FACILITY_TYPE" placeholder="Chọn loại hình cấp tín dụng" optionLabel="name" [showClear]="true"></p-dropdown>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Tính chất hạn mức</label>
+            </div>
+            <div class="col-9 my-container">
+                <p-selectButton class="p-inputtext-sm" [options]="revolvingOptions" [(ngModel)]="createFac.REVOLVING" optionLabel="name" optionValue="code"></p-selectButton>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Thời hạn cấp tín dụng</label>
+            </div>
+            <div class="col-6">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" [(ngModel)]="createFac.SUBMIT_TENOR" pInputText placeholder="Nhập thời hạn cấp tín dụng" />
+            </div>
+            <div class="col-3">
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="units" [(ngModel)]="createFac.SUBMIT_TENOR_UNIT" placeholder="Chọn" optionLabel="name" [showClear]="true"></p-dropdown>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Số tiền cấp tín dụng</label>
+            </div>
+            <div class="col-6">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" pInputText placeholder="Nhập số tiền cấp tín dụng" />
+            </div>
+            <div class="col-3">
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="currencys" [(ngModel)]="createFac.FACILITY_LIMIT" placeholder="Chọn" optionLabel="name" [showClear]="true"></p-dropdown>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Số tiền cấp tín dụng không TSBĐ</label>
+            </div>
+            <div class="col-6">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" [(ngModel)]="createFac.UNSECURE_LIMIT" pInputText placeholder="Nhập số tiền cấp tín dụng" />
+            </div>
+            <div class="col-3" [style]="{'text-align':'center'}">
+                <p>VND</p>
+            </div>
+        </div>
+    </p-panel>
+    <div style="text-align: center;">
+        <button type="button" label="Lưu thông tin" (click)="SubmitCreateFacilityForm('Add')"
+            class="p-element p-ripple p-button-raised p-button-info p-button-text p-button p-component">
+            <span class="p-button-label">Lưu thông tin</span>
+        </button>
+        <button type="button" label="Thoát" (click)="SubmitCreateFacilityForm('Close')"
+            class="p-element p-ripple p-button-raised p-button-danger p-button-text p-button p-component">
+            <span class="p-button-label">Thoát</span>
+        </button>
+    </div>
+</p-dialog>
+
+<p-dialog header="Thêm hạn mức chi tiết" [(visible)]="displayModalDetail" [modal]="true"
+    [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
+    <p-panel header="Thông tin hạn mức">
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Mã hồ sơ</label>
+            </div>
+            <div class="col-10">
+                <p class=" p-inputtext-sm">CAR.24122021.02103335</p>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Tên khách hàng</label>
+            </div>
+            <div class="col-10">
+                <p class=" p-inputtext-sm">Huy Nguyễn</p>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Đơn vị/Chi nhánh</label>
+            </div>
+            <div class="col-10">
+                <p class=" p-inputtext-sm">CN Quảng Ninh</p>
+            </div>
+        </div>
+
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Ngày trình hồ sơ</label>
+            </div>
+            <div class="col-10">
+                <p class=" p-inputtext-sm"></p>
+            </div>
+        </div>
+    </p-panel>
+</p-dialog>
