@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ConfirmationService, MenuItem, Message, MessageService } from 'primeng/api';
+import { CarModel } from 'src/app/models/car.model';
 import { DropdownModel } from 'src/app/models/common.model';
 import { FacilityModel } from 'src/app/models/facility.model';
+import { CarService } from 'src/app/services/CarService/car.service';
 import { FacilityService } from 'src/app/services/FacilityService/facility.service';
 
 @Component({
@@ -12,7 +14,8 @@ import { FacilityService } from 'src/app/services/FacilityService/facility.servi
 })
 
 export class FacilityListComponent implements OnInit {
-  @Input() lstFacility = [] as FacilityModel[];
+  carViewModel: CarModel = {} as CarModel;
+
   facActive: FacilityModel = {} as FacilityModel;
 
   items: MenuItem[] = [];
@@ -28,6 +31,7 @@ export class FacilityListComponent implements OnInit {
 
   constructor(public messageService: MessageService,
     private facilityService: FacilityService,
+    private carService: CarService,
     private confirmationService: ConfirmationService) {
     this.revolvingOptions = [
       { name: "Quay vòng", code: "1" },
@@ -48,6 +52,10 @@ export class FacilityListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.carService.carInfo$.subscribe(data => {
+      this.carViewModel = data;
+    });
+
     this.items = [
       {
         label: 'Hạn mức tổng hợp', command: () => {
@@ -68,9 +76,10 @@ export class FacilityListComponent implements OnInit {
       header: 'Xóa Facility',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.lstFacility = this.lstFacility.filter(item => item.ID !== this.facActive.ID);
-        console.log('this.lstFacility', this.lstFacility);
+        this.carViewModel.ListFacility = this.carViewModel.ListFacility.filter(item => item.ID !== this.facActive.ID);
+        console.log('this.lstFacility', this.carViewModel.ListFacility);
         console.log('this.createFac', this.facActive);
+        this.carService.carInfo$.next(this.carViewModel);
         this.messageService.add({ severity: 'info', summary: 'Thành công', detail: 'Đã xóa Facility' });
       },
       reject: () => {
@@ -94,7 +103,12 @@ export class FacilityListComponent implements OnInit {
   SubmitCreateFacilityForm(action: string) {
     if (action === "Add") {
       console.log('Fac Create: ', this.createFac);
-      this.lstFacility.push(this.createFac);
+      this.createFac.ID = -1;
+      this.carViewModel.ListFacility.push(this.createFac);
+      console.log('CAR Create: ', this.carViewModel);
+      console.log('FAC Create: ', this.carViewModel.ListFacility);
+      this.carService.carInfo$.next(this.carViewModel);
+
       this.displayModalGeneral = false;
       this.displayModalDetail = false;
     }

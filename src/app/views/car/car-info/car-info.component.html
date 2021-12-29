@@ -5,13 +5,13 @@
       <h5 style="margin-bottom: 0px;"><i class="pi pi-user" style="font-size: 1.2rem"></i> 310CVKH01</h5>
     </div>
 
-    <ul *ngIf="customerId===0" class="list-unstyled components" id="MainMenuLeft">
+    <ul *ngIf="carViewModel.CUSTOMER_ID===0" class="list-unstyled components" id="MainMenuLeft">
       <li ng-disabled="true" (click)="OnChangeMainTab('CustomerTab')">
         <a>2. Khách hàng</a>
       </li>
     </ul>
 
-    <ul *ngIf="customerId>0" class="list-unstyled components" id="MainMenuLeft">
+    <ul *ngIf="carViewModel.CUSTOMER_ID>0" class="list-unstyled components" id="MainMenuLeft">
       <li class="active" (click)="OnChangeMainTab('MainTab')">
         <a>1. Thông tin hồ sơ</a>
       </li>
@@ -42,22 +42,21 @@
     </div>
 
     <!-- Trường hợp chưa có KH -->
-    <div *ngIf="customerId===0">
-      <app-customer-search (onClickAddCustomerEvent)="onChangeCustomerId($event)"></app-customer-search>
+    <div *ngIf="carViewModel.CUSTOMER_ID===0">
+      <app-customer-search></app-customer-search>
     </div>
 
-    <div *ngIf="customerId>0">
+    <div *ngIf="carViewModel.CUSTOMER_ID>0">
       <div *ngIf="activeMainTab==='MainTab'">
-        <app-car-detail [carViewModel]="this.carInfo"></app-car-detail>
-        <!-- <router-outlet></router-outlet> -->
+        <app-car-detail></app-car-detail>
       </div>
   
       <div *ngIf="activeMainTab==='CustomerTab'">
-        <app-customer-info [customerId]="customerId"></app-customer-info>
+        <app-customer-info></app-customer-info>
       </div>
   
       <div *ngIf="activeMainTab==='FacilityTab'">
-        <app-facility-info [applicationId]="this.carInfo.ID"></app-facility-info>
+        <app-facility-info></app-facility-info>
       </div>
     </div>
   </div>

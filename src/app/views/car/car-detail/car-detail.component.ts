@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CarModel } from 'src/app/models/car.model';
+import { CarService } from 'src/app/services/CarService/car.service';
 
 @Component({
   selector: 'app-car-detail',
@@ -7,11 +8,17 @@ import { CarModel } from 'src/app/models/car.model';
   styleUrls: ['./car-detail.component.scss']
 })
 export class CarDetailComponent implements OnInit {
-  @Input() carViewModel: CarModel = {} as CarModel;
+  
+  carViewModel: CarModel = {} as CarModel;
+
   contractDate: any;
-  constructor() { }
+  constructor(
+    private carService: CarService) { }
 
   ngOnInit(): void {
+    this.carService.carInfo$.subscribe(data => {
+      this.carViewModel = data;
+    });
   }
 
 }

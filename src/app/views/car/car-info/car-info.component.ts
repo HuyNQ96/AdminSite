@@ -13,7 +13,8 @@ export class CarInfoComponent implements OnInit {
 
   applicationCode: any;
   customerId: number = 0;
-  carInfo = {} as CarModel;
+
+  carViewModel = {} as CarModel;
 
   isActive: boolean = false;
 
@@ -38,10 +39,11 @@ export class CarInfoComponent implements OnInit {
     });
     // Lấy thông tin CAR  
     this.carService.getCarDetail(this.applicationCode).subscribe((data: CarModel) => {
-      this.carInfo = data;
+      this.carViewModel = data;
       this.customerId = data.CUSTOMER_ID;
-      console.log('Customer ID: ', this.carInfo.CUSTOMER_ID);
-      console.log('Car ID: ', this.carInfo.ID);
+      this.carService.carInfo$.next(data);
+      console.log('Customer ID: ', this.carViewModel.CUSTOMER_ID);
+      console.log('Car ID: ', this.carViewModel.ID);
     });
 
   }
@@ -54,10 +56,5 @@ export class CarInfoComponent implements OnInit {
       $(this).parent().addClass('active').siblings().removeClass('active');
     });
     this.activeMainTab = tabName;
-  }
-
-  onChangeCustomerId(value: any) {
-    console.log("ID KH sau khi Add = ", value.customerId);
-    this.customerId = value.customerId;
   }
 }

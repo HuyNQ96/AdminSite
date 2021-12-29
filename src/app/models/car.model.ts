@@ -1,3 +1,5 @@
+import { FacilityModel } from "./facility.model";
+
 export interface CarModel {
     ID: number;
     APPROVAL_STATUS: string;
@@ -38,5 +40,7 @@ export interface CarModel {
     ADD_INFO_2: string;
     ADD_INFO_3: string;
     SC_APPROVAL_LEVEL: string;
+
+    ListFacility: FacilityModel[];
 }
 

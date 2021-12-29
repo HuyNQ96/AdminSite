@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem, MessageService, PrimeNGConfig } from 'primeng/api';
+import { CarModel } from 'src/app/models/car.model';
 import { DropdownModel } from 'src/app/models/common.model';
 import { FacilityModel } from 'src/app/models/facility.model';
+import { CarService } from 'src/app/services/CarService/car.service';
 import { FacilityService } from 'src/app/services/FacilityService/facility.service';
 
 @Component({
@@ -11,27 +13,31 @@ import { FacilityService } from 'src/app/services/FacilityService/facility.servi
   providers: [MessageService]
 })
 export class FacilityInfoComponent implements OnInit {
-  @Input() applicationId: number = 0;
-
-  lstFacility = [] as FacilityModel[];
+  carViewModel: CarModel = {} as CarModel;
 
   activeState: boolean[] = [true, false, false];
   index: number = 0;
 
-  constructor(public messageService: MessageService, 
+  constructor(public messageService: MessageService,
     private facilityService: FacilityService,
+    private carService: CarService,
     private primengConfig: PrimeNGConfig) {
-    
+
   }
 
   ngOnInit() {
+    this.carService.carInfo$.subscribe(data => {
+      this.carViewModel = data;
+    });
+
     this.primengConfig.ripple = true;
 
-    if (this.applicationId > 0) {
-      this.facilityService.getListFacilityByAppId(this.applicationId).subscribe((data: FacilityModel[]) => {
+    if (this.carViewModel.ID > 0 && !this.carViewModel.ListFacility) {
+      this.facilityService.getListFacilityByAppId(this.carViewModel.ID).subscribe((data: FacilityModel[]) => {
         console.log("data: ", data);
-        this.lstFacility = data;
-        console.log("lstFacility: ", this.lstFacility);
+        this.carViewModel.ListFacility = data;
+        this.carService.carInfo$.next(this.carViewModel);
+        console.log("lstFacility: ", this.carViewModel.ListFacility);
       });
     }
   }

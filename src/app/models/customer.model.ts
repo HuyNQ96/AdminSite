@@ -16,3 +16,12 @@ export interface CustomerModel {
   CUSTOMER_DEPT?: string;
   CUSTOMER_EX?: string;
 }
+
+export interface CustomerSearchModel {
+  customerNameSearch?: string;
+  customerNumberSearch?: string;
+  customerIdNumberSearch?: string;
+  customerCIFSearch?: string;
+  departmentSearch?: number;
+  customerCatSearch?: number;
+}

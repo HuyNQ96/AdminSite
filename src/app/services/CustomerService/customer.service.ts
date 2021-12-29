@@ -28,7 +28,9 @@ export class CustomerService {
         return this.httpClient.get<CustomerModel[]>(url, this.httpOptions);
     }
 
-    public getListCustomerByCondition(custCatId: number, deptId: number, customerNumber: string, customerName: string, customerCIF: string, customerIdentity: string): Observable<CustomerModel[]> {
+    public getListCustomerByCondition(custCatId: number = 0, deptId: number = 0, customerNumber: 
+        string = '', customerName: string = '', 
+        customerCIF: string = '', customerIdentity: string = ''): Observable<CustomerModel[]> {
         const url = this.REST_API_SERVICE + '/get_customer';
         let params = new HttpParams();
         params = params.append('custCatId', custCatId);

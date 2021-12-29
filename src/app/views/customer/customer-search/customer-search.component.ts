@@ -1,6 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { CustomerCategoryModel, CustomerModel } from 'src/app/models/customer.model';
+import { CarModel } from 'src/app/models/car.model';
+import { CustomerCategoryModel, CustomerModel, CustomerSearchModel } from 'src/app/models/customer.model';
 import { DepartmentModel } from 'src/app/models/department.model';
+import { CarService } from 'src/app/services/CarService/car.service';
 import { CustomerCategoryService } from 'src/app/services/CustomerService/customer-category.service';
 import { CustomerService } from 'src/app/services/CustomerService/customer.service';
 import { DepartmentService } from 'src/app/services/DepartmentService/department.service';
@@ -11,15 +13,13 @@ import { DepartmentService } from 'src/app/services/DepartmentService/department
   styleUrls: ['./customer-search.component.scss']
 })
 export class CustomerSearchComponent implements OnInit {
-  @Output() onClickAddCustomerEvent = new EventEmitter<any>();
-  
   index: number = 0;
   rows = 0;
   first = 0;
 
   lstCustomer: CustomerModel[] = [];
 
-  resultCount: number = 0;
+  carViewModel: CarModel = {} as CarModel;
 
   lstCustCat: CustomerCategoryModel[] = [];
   selectedCustCat: any;
@@ -30,25 +30,22 @@ export class CustomerSearchComponent implements OnInit {
   selectedDepartment: any;
 
   // Search Form
-  customerNameSearch: string = '';
-  customerNumberSearch: string = '';
-  customerIdNumberSearch: string = '';
-  customerCIFSearch: string = '';
-  departmentSearch: number = 0;
-  customerCatSearch: number = 0;
+  customerSearchModel: CustomerSearchModel = {} as CustomerSearchModel;
 
   constructor(
     private departmentService: DepartmentService,
     private customerCategoryService: CustomerCategoryService,
+    private carService: CarService,
     private customerService: CustomerService
   ) {
 
   }
-  onClickAddCustomer(customerId:number) {
-    this.onClickAddCustomerEvent.emit({ customerId });
-  }
 
   ngOnInit() {
+    // subscribe CarInfo Model
+    this.carService.carInfo$.subscribe(data => {
+      this.carViewModel = data;
+    });
     // Dropdown CustCat
     this.customerCategoryService.getListCustCat().subscribe((data: CustomerCategoryModel[]) => {
       data.forEach(element => {
@@ -69,24 +66,32 @@ export class CustomerSearchComponent implements OnInit {
   OnclickSearchCustomer() {
     // Nếu không có giá trị nào thì không cho search
     if (!this.selectedDepartment && !this.selectedCustCat
-      && this.customerNameSearch === '' && this.customerNumberSearch === '' && this.customerIdNumberSearch === '' && this.customerCIFSearch === '')
+      && this.customerSearchModel.customerNameSearch === '' && this.customerSearchModel.customerNumberSearch === '' 
+      && this.customerSearchModel.customerIdNumberSearch === '' && this.customerSearchModel.customerCIFSearch === '')
       return;
     if (this.selectedDepartment)
-      this.departmentSearch = this.selectedDepartment.ID;
+    this.customerSearchModel.departmentSearch = this.selectedDepartment.ID;
     if (this.selectedCustCat)
-      this.customerCatSearch = this.selectedCustCat.ID;
+    this.customerSearchModel.customerCatSearch = this.selectedCustCat.ID;
 
-    this.customerService.getListCustomerByCondition(this.customerCatSearch, this.departmentSearch, this.customerNameSearch, this.customerNameSearch, this.customerCIFSearch, this.customerIdNumberSearch).subscribe((data: CustomerModel[]) => {
+    this.customerService.getListCustomerByCondition(this.customerSearchModel.customerCatSearch, 
+      this.customerSearchModel.departmentSearch, this.customerSearchModel.customerNameSearch, 
+      this.customerSearchModel.customerNameSearch, this.customerSearchModel.customerCIFSearch, 
+      this.customerSearchModel.customerIdNumberSearch).subscribe((data: CustomerModel[]) => {
       this.lstCustomer = data;
-      this.resultCount = this.lstCustomer.length;
     });
   }
   OnclickClearFormSearchCustomer() {
-    this.customerNameSearch = '';
-    this.customerNumberSearch = '';
-    this.customerIdNumberSearch = '';
-    this.customerCIFSearch = '';
+    this.customerSearchModel.customerNameSearch = '';
+    this.customerSearchModel.customerNumberSearch = '';
+    this.customerSearchModel.customerIdNumberSearch = '';
+    this.customerSearchModel.customerCIFSearch = '';
     this.selectedDepartment = null;
     this.selectedCustCat = null;
+  }
+  // Thêm khách hàng => thay đổi lại carInfo$ nhằm load lại màn hình
+  onClickAddCustomer(customerId:number) {
+    this.carViewModel.CUSTOMER_ID = customerId;
+    this.carService.carInfo$.next(this.carViewModel);
   }
 }

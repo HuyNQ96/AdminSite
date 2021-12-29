@@ -1,10 +1,10 @@
 <p-tabView [(activeIndex)]="index">
     <p-tabPanel header=" Cấu trúc hạn mức đề xuất" (click)="OnchangeIndexTab(0)">
         <div *ngIf="index===0">
-            <app-facility-list [lstFacility]="lstFacility"></app-facility-list>
+            <app-facility-list></app-facility-list>
         </div>
     </p-tabPanel>
-    <p-tabPanel *ngFor="let fac of lstFacility; index as i" header="{{fac.FACILITY_DESC}}"
+    <p-tabPanel *ngFor="let fac of carViewModel.ListFacility; index as i" header="{{fac.FACILITY_DESC}}"
         (click)="OnchangeIndexTab(index)">
         <div *ngIf="index===1">
             <div style="text-align: right;padding-bottom: 5px;">
