@@ -43,7 +43,7 @@
 
     <!-- Trường hợp chưa có KH -->
     <div *ngIf="customerId===0">
-      <app-customer-search></app-customer-search>
+      <app-customer-search (onClickAddCustomerEvent)="onChangeCustomerId($event)"></app-customer-search>
     </div>
 
     <div *ngIf="customerId>0">
@@ -53,7 +53,7 @@
       </div>
   
       <div *ngIf="activeMainTab==='CustomerTab'">
-        <app-customer-info *ngIf="customerId>0"></app-customer-info>
+        <app-customer-info [customerId]="customerId"></app-customer-info>
       </div>
   
       <div *ngIf="activeMainTab==='FacilityTab'">

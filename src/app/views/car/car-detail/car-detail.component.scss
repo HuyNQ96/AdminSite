@@ -17,3 +17,8 @@ span{
 .p-calendar-w-btn{
     width: 50% !important;
 }
+:host ::ng-deep {
+    .p-accordion-header-link,.p-panel-header {
+        background-color: var(--indigo-200) !important;
+    }
+}

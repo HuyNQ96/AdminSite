@@ -13,7 +13,8 @@
                     <span class="p-ink"></span>
                 </button>
             </div>
-            <app-customer-main-info></app-customer-main-info> 
+            <br>
+            <app-customer-main-info [customerViewModel]="customerViewModel"></app-customer-main-info> 
         </div>
     </p-tabPanel>
     <p-tabPanel header="KHÁCH HÀNG LIÊN QUAN" (click)="OnchangeIndexTab(1)">

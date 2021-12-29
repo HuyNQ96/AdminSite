@@ -1,1 +1,135 @@
-<p>customer-main-info works!</p>
+<p-accordion>
+    <p-accordionTab header="Thông tin cơ bản" [(selected)]="activeState[0]" id="firstaccordion">
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Mã khách hàng</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">{{customerViewModel.CUSTOMER_NUMBER}}</p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Phân nhóm khách hàng</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">Cá nhân</p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Tên khách hàng</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">{{customerViewModel.CUSTOMER_NAME}}</p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Tên gọi khác</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">xxx123</p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Đơn vị quản lý</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">Quảng Ninh</p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Cán bộ quản lý KH</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm"></p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">KHThuộc DS theo dõi rửa tiền</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm"></p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Thuộc DS đen rửa tiền</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm"></p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Nhóm nợ</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">3</p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Số CIF</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">01619198</p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Hạn chế tín dụng</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">KHÔNG HẠN CHẾ</p>
+            </div>
+        </div>
+    </p-accordionTab>
+    <br>
+    <p-accordionTab header="Thông tin định danh" [(selected)]="activeState[1]">
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Loại giấy tờ định danh</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">Chứng minh thư nhân dân</p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Mã số định danh</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">990998997</p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Nơi cấp giấy tờ</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">QN</p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Quốc gia cấp giấy tờ</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">VIET NAM</p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Ngày cấp giấy tờ</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">02/11/2021</p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Ngày hết hạn</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm"></p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Ngày thay đổi gần nhất</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm"></p>
+            </div>
+        </div>
+    </p-accordionTab>
+</p-accordion>

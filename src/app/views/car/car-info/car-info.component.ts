@@ -36,7 +36,7 @@ export class CarInfoComponent implements OnInit {
       this.applicationCode = params.get('applicationCode');
       console.log('applicationCode: ', this.applicationCode);
     });
-    // Lấy thông tin CAR
+    // Lấy thông tin CAR  
     this.carService.getCarDetail(this.applicationCode).subscribe((data: CarModel) => {
       this.carInfo = data;
       this.customerId = data.CUSTOMER_ID;
@@ -54,5 +54,10 @@ export class CarInfoComponent implements OnInit {
       $(this).parent().addClass('active').siblings().removeClass('active');
     });
     this.activeMainTab = tabName;
+  }
+
+  onChangeCustomerId(value: any) {
+    console.log("ID KH sau khi Add = ", value.customerId);
+    this.customerId = value.customerId;
   }
 }

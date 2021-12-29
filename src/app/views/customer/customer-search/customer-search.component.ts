@@ -75,12 +75,6 @@ export class CustomerSearchComponent implements OnInit {
       this.departmentSearch = this.selectedDepartment.ID;
     if (this.selectedCustCat)
       this.customerCatSearch = this.selectedCustCat.ID;
-    console.log('customerNameSearch: ', this.customerNameSearch);
-    console.log('customerNumberSearch: ', this.customerNumberSearch);
-    console.log('customerIdNumberSearch: ', this.customerIdNumberSearch);
-    console.log('customerCIFSearch: ', this.customerCIFSearch);
-    console.log('departmentSearch: ', this.departmentSearch);
-    console.log('customerCatSearch: ', this.customerCatSearch);
 
     this.customerService.getListCustomerByCondition(this.customerCatSearch, this.departmentSearch, this.customerNameSearch, this.customerNameSearch, this.customerCIFSearch, this.customerIdNumberSearch).subscribe((data: CustomerModel[]) => {
       this.lstCustomer = data;
@@ -94,11 +88,5 @@ export class CustomerSearchComponent implements OnInit {
     this.customerCIFSearch = '';
     this.selectedDepartment = null;
     this.selectedCustCat = null;
-    console.log('customerNameSearch: ', this.customerNameSearch);
-    console.log('customerNumberSearch: ', this.customerNumberSearch);
-    console.log('customerIdNumberSearch: ', this.customerIdNumberSearch);
-    console.log('customerCIFSearch: ', this.customerCIFSearch);
-    console.log('departmentSearch: ', this.departmentSearch);
-    console.log('customerCatSearch: ', this.customerCatSearch);
   }
 }

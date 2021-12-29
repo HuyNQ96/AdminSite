@@ -6,7 +6,7 @@ import { CustomerModel } from 'src/app/models/customer.model';
 
 @Injectable({
     providedIn: 'root'
-  })
+})
 export class CustomerService {
     private REST_API_SERVICE = REST_TEST_API;
     private httpOptions = {
@@ -39,5 +39,13 @@ export class CustomerService {
         params = params.append('customerIdentity', customerIdentity);
         this.httpOptions.params = params;
         return this.httpClient.get<CustomerModel[]>(url, this.httpOptions);
+    }
+
+    public getCustomerDetail(customerId: number = 0): Observable<CustomerModel> {
+        const url = this.REST_API_SERVICE + '/get_customer_detail';
+        let params = new HttpParams();
+        params = params.append('custId', customerId);
+        this.httpOptions.params = params;
+        return this.httpClient.get<CustomerModel>(url, this.httpOptions);
     }
 }

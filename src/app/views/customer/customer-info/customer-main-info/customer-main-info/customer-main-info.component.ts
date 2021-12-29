@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { CustomerModel } from 'src/app/models/customer.model';
 
 @Component({
   selector: 'app-customer-main-info',
@@ -6,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./customer-main-info.component.scss']
 })
 export class CustomerMainInfoComponent implements OnInit {
-
+  activeState: boolean[] = [true, true, true];
+  @Input() customerViewModel: CustomerModel = {} as CustomerModel;
   constructor() { }
 
   ngOnInit(): void {
