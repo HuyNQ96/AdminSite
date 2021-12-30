@@ -1,12 +1,12 @@
 <p-tabView [(activeIndex)]="index">
-    <p-tabPanel header=" Cấu trúc hạn mức đề xuất" (click)="OnchangeIndexTab(0)">
+    <p-tabPanel header=" Cấu trúc hạn mức đề xuất" (click)="OnchangeIndexTab(0,0)">
         <div *ngIf="index===0">
             <app-facility-list></app-facility-list>
         </div>
     </p-tabPanel>
     <p-tabPanel *ngFor="let fac of carViewModel.ListFacility; index as i" header="{{fac.FACILITY_DESC}}"
-        (click)="OnchangeIndexTab(index)">
-        <div *ngIf="index===1">
+        (click)="OnchangeIndexTab(index,fac.ID)">
+        <div *ngIf="index!==0">
             <div style="text-align: right;padding-bottom: 5px;">
                 <button type="button" label="Sửa"
                     class="p-element p-ripple p-button-raised p-button-info p-button-text p-button p-component">
@@ -19,7 +19,7 @@
                     <span class="p-ink"></span>
                 </button>
             </div>
-            <app-facility-detail facilityIdString="1"></app-facility-detail>q
+            <app-facility-detail [facilityId]="fac.ID"></app-facility-detail>
         </div>
     </p-tabPanel>
 </p-tabView>

@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { CarModel } from 'src/app/models/car.model';
 import { CarService } from 'src/app/services/CarService/car.service';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-car-info',
   templateUrl: './car-info.component.html',
-  styleUrls: ['./car-info.component.scss']
+  styleUrls: ['./car-info.component.scss'],
+  providers: [MessageService]
 })
 export class CarInfoComponent implements OnInit {
 
@@ -19,17 +20,14 @@ export class CarInfoComponent implements OnInit {
   isActive: boolean = false;
 
   activeMainTab: string = 'MainTab';
-  constructor(private route: ActivatedRoute, private carService: CarService) {
+  constructor(private route: ActivatedRoute, 
+    private carService: CarService,
+    public messageService: MessageService) {
   }
 
   ngOnInit() {
-    // Action cho LeftMenu
-    $(document).ready(function () {
-      $('#sidebarCollapse').on('click', function () {
-        $('#sidebar').toggleClass('active');
-        $(this).toggleClass('active');
-      });
-    });
+    this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Đã thêm khách hàng thành công vào hồ sơ!' });
+
     this.OnChangeMainTab('MainTab');
     // Lấy thông tin CAR
 
@@ -47,14 +45,14 @@ export class CarInfoComponent implements OnInit {
     });
 
   }
+  onClickSaveApp(){
+    this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Đã thêm khách hàng thành công vào hồ sơ!' });
+  }
   OnclickShowMenu(){
     this.isActive = !this.isActive;
   }
 
   public OnChangeMainTab(tabName: string = '') {
-    $("#MainMenuLeft li a").click(function () {
-      $(this).parent().addClass('active').siblings().removeClass('active');
-    });
     this.activeMainTab = tabName;
   }
 }

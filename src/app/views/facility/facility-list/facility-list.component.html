@@ -22,7 +22,7 @@
     <p-table [value]="carViewModel.ListFacility" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-sm" responsiveLayout="scroll" selectionMode="single"
-        [(selection)]="facActive" dataKey="FACILITY_CODE">
+        [(selection)]="facActive" dataKey="ID">
         <ng-template pTemplate="header">
             <tr>
                 <th [ngStyle]="{backgroundColor:'var(--indigo-200)'}">Mã Facility</th>

@@ -1,46 +1,129 @@
 <p-accordion>
-    <p-accordionTab header="Thông tin hạn mức" [(selected)]="activeState[0]">
-        <div class="card">
-            <h5>Inline</h5>
-            <div class="p-formgroup-inline">
-                <div class="p-field">
-                    <label for="firstname5" class="p-sr-only">Firstname</label>
-                    <input id="firstname5" type="text" pInputText placeholder="Firstname" />
-                </div>
-                <div class="p-field">
-                    <label for="lastname5" class="p-sr-only">Lastname</label>
-                    <input id="lastname5" type="text" pInputText placeholder="Lastname" />
-                </div>
-                <button pButton pRipple type="button" label="Submit"></button>
+    <p-accordionTab header="Thông tin cơ bản" id="firstaccordion" [(selected)]="activeState[0]">
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Mã Facility</label>
+            </div>
+            <div class="col-10">
+                <p class=" p-inputtext-sm">{{currentFacility.FACILITY_CODE}}</p>
             </div>
         </div>
-        <div _ngcontent-itn-c67="" class="card">
-            <h5 _ngcontent-itn-c67="">Horizontal and Fluid</h5>
-            <div _ngcontent-itn-c67="" class="p-fluid">
-                <div _ngcontent-itn-c67="" class="p-field p-grid"><label _ngcontent-itn-c67="" for="firstname4"
-                        class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Firstname</label>
-                    <div _ngcontent-itn-c67="" class="p-col-12 p-md-10"><input _ngcontent-itn-c67="" id="firstname4"
-                            type="text" pinputtext="" class="p-inputtext p-component p-element"></div>
-                </div>
-                <div _ngcontent-itn-c67="" class="p-field p-grid"><label _ngcontent-itn-c67="" for="lastname4"
-                        class="p-col-12 p-mb-2 p-md-2 p-mb-md-0">Lastname</label>
-                    <div _ngcontent-itn-c67="" class="p-col-12 p-md-10"><input _ngcontent-itn-c67="" id="lastname4"
-                            type="text" pinputtext="" class="p-inputtext p-component p-element"></div>
-                </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Loại hình cấp tín dụng</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">Cho vay thông thường</p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Tính chất hạn mức</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">Không quay vòng</p>
             </div>
         </div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-            ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-            velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-            laborum.</p>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Đơn vị quản lý</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">Quảng Ninh</p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Cán bộ quản lý KH</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm"></p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">KHThuộc DS theo dõi rửa tiền</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm"></p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Thuộc DS đen rửa tiền</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm"></p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Nhóm nợ</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">3</p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Số CIF</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">01619198</p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Hạn chế tín dụng</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">KHÔNG HẠN CHẾ</p>
+            </div>
+        </div>
     </p-accordionTab>
-    <p-accordionTab header="Thông tin mở rộng" [(selected)]="activeState[1]">
-        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-            aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-            architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut
-            odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-            voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+    <br>
+    <p-accordionTab header="Thông tin định danh" [(selected)]="activeState[0]">
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Loại giấy tờ định danh</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">Chứng minh thư nhân dân</p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Mã số định danh</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">990998997</p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Nơi cấp giấy tờ</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">QN</p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Quốc gia cấp giấy tờ</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">VIET NAM</p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Ngày cấp giấy tờ</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm">02/11/2021</p>
+            </div>
+            <div class="col-2">
+                <label class="p-text-bold">Ngày hết hạn</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm"></p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-2">
+                <label class="p-text-bold">Ngày thay đổi gần nhất</label>
+            </div>
+            <div class="col-4">
+                <p class=" p-inputtext-sm"></p>
+            </div>
+        </div>
     </p-accordionTab>
 </p-accordion>

@@ -10,3 +10,8 @@
 #firstaccordion .ui-accordion-content{
     background-color: blueviolet !important; //your choice colour
 }
+:host ::ng-deep {
+    .p-accordion-header-link,.p-panel-header {
+        background-color: var(--indigo-200) !important;
+    }
+}

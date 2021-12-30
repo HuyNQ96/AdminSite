@@ -46,7 +46,7 @@ export class FacilityInfoComponent implements OnInit {
     this.messageService.add({ severity: severity, summary: 'Success', detail: 'Data Saved' });
   }
 
-  OnchangeIndexTab(newIndex: number = 0) {
+  OnchangeIndexTab(newIndex: number = 0, facId: number = 0) {
     this.index = newIndex;
   }
 }

@@ -6,24 +6,23 @@
     </div>
 
     <ul *ngIf="carViewModel.CUSTOMER_ID===0" class="list-unstyled components" id="MainMenuLeft">
-      <li ng-disabled="true" (click)="OnChangeMainTab('CustomerTab')">
+      <li (click)="OnChangeMainTab('CustomerTab')">
         <a>2. Khách hàng</a>
       </li>
     </ul>
 
     <ul *ngIf="carViewModel.CUSTOMER_ID>0" class="list-unstyled components" id="MainMenuLeft">
-      <li class="active" (click)="OnChangeMainTab('MainTab')">
+      <li (click)="OnChangeMainTab('MainTab')" [class.active]="activeMainTab === 'MainTab'">
         <a>1. Thông tin hồ sơ</a>
       </li>
-      <li ng-disabled="true" (click)="OnChangeMainTab('CustomerTab')">
+      <li (click)="OnChangeMainTab('CustomerTab')" [class.active]="activeMainTab === 'CustomerTab'">
         <a>2. Khách hàng</a>
       </li>
-      <li (click)="OnChangeMainTab('FacilityTab')">
+      <li (click)="OnChangeMainTab('FacilityTab')" [class.active]="activeMainTab === 'FacilityTab'">
         <a>3. Thông tin hạn mức</a>
       </li>
     </ul>
   </nav>
-
   <!-- Page Content Holder -->
   <div id="content" style="width: 100%;">
     <nav class="navbar navbar-default">
@@ -61,3 +60,4 @@
     </div>
   </div>
 </div>
+<p-toast></p-toast>

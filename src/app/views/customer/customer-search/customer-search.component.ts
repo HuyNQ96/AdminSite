@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { CarModel } from 'src/app/models/car.model';
 import { CustomerCategoryModel, CustomerModel, CustomerSearchModel } from 'src/app/models/customer.model';
 import { DepartmentModel } from 'src/app/models/department.model';
@@ -10,7 +11,8 @@ import { DepartmentService } from 'src/app/services/DepartmentService/department
 @Component({
   selector: 'app-customer-search',
   templateUrl: './customer-search.component.html',
-  styleUrls: ['./customer-search.component.scss']
+  styleUrls: ['./customer-search.component.scss'],
+  providers: [MessageService]
 })
 export class CustomerSearchComponent implements OnInit {
   index: number = 0;
@@ -36,7 +38,8 @@ export class CustomerSearchComponent implements OnInit {
     private departmentService: DepartmentService,
     private customerCategoryService: CustomerCategoryService,
     private carService: CarService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    public messageService: MessageService
   ) {
 
   }
@@ -66,20 +69,20 @@ export class CustomerSearchComponent implements OnInit {
   OnclickSearchCustomer() {
     // Nếu không có giá trị nào thì không cho search
     if (!this.selectedDepartment && !this.selectedCustCat
-      && this.customerSearchModel.customerNameSearch === '' && this.customerSearchModel.customerNumberSearch === '' 
+      && this.customerSearchModel.customerNameSearch === '' && this.customerSearchModel.customerNumberSearch === ''
       && this.customerSearchModel.customerIdNumberSearch === '' && this.customerSearchModel.customerCIFSearch === '')
       return;
     if (this.selectedDepartment)
-    this.customerSearchModel.departmentSearch = this.selectedDepartment.ID;
+      this.customerSearchModel.departmentSearch = this.selectedDepartment.ID;
     if (this.selectedCustCat)
-    this.customerSearchModel.customerCatSearch = this.selectedCustCat.ID;
+      this.customerSearchModel.customerCatSearch = this.selectedCustCat.ID;
 
-    this.customerService.getListCustomerByCondition(this.customerSearchModel.customerCatSearch, 
-      this.customerSearchModel.departmentSearch, this.customerSearchModel.customerNameSearch, 
-      this.customerSearchModel.customerNameSearch, this.customerSearchModel.customerCIFSearch, 
+    this.customerService.getListCustomerByCondition(this.customerSearchModel.customerCatSearch,
+      this.customerSearchModel.departmentSearch, this.customerSearchModel.customerNameSearch,
+      this.customerSearchModel.customerNameSearch, this.customerSearchModel.customerCIFSearch,
       this.customerSearchModel.customerIdNumberSearch).subscribe((data: CustomerModel[]) => {
-      this.lstCustomer = data;
-    });
+        this.lstCustomer = data;
+      });
   }
   OnclickClearFormSearchCustomer() {
     this.customerSearchModel.customerNameSearch = '';
@@ -90,8 +93,13 @@ export class CustomerSearchComponent implements OnInit {
     this.selectedCustCat = null;
   }
   // Thêm khách hàng => thay đổi lại carInfo$ nhằm load lại màn hình
-  onClickAddCustomer(customerId:number) {
+  async onClickAddCustomer(customerId: number) {
+    this.messageService.add({ severity: 'success', summary: 'Thành công', detail: 'Đã thêm khách hàng thành công vào hồ sơ!' });
+    await this.delay(1000);
     this.carViewModel.CUSTOMER_ID = customerId;
     this.carService.carInfo$.next(this.carViewModel);
+  }
+  delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 }

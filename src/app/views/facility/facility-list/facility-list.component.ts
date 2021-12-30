@@ -1,10 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ConfirmationService, MenuItem, Message, MessageService } from 'primeng/api';
 import { CarModel } from 'src/app/models/car.model';
 import { DropdownModel } from 'src/app/models/common.model';
 import { FacilityModel } from 'src/app/models/facility.model';
 import { CarService } from 'src/app/services/CarService/car.service';
-import { FacilityService } from 'src/app/services/FacilityService/facility.service';
 
 @Component({
   selector: 'app-facility-list',
@@ -28,9 +27,9 @@ export class FacilityListComponent implements OnInit {
   units: DropdownModel[] = [];
 
   createFac = {} as FacilityModel;
+  lstFacCreate: FacilityModel[] = [];
 
   constructor(public messageService: MessageService,
-    private facilityService: FacilityService,
     private carService: CarService,
     private confirmationService: ConfirmationService) {
     this.revolvingOptions = [
@@ -103,14 +102,31 @@ export class FacilityListComponent implements OnInit {
   SubmitCreateFacilityForm(action: string) {
     if (action === "Add") {
       console.log('Fac Create: ', this.createFac);
-      this.createFac.ID = -1;
-      this.carViewModel.ListFacility.push(this.createFac);
+      let minId = 0;
+      if (this.carViewModel.ListFacility) {
+        let ids = this.carViewModel.ListFacility.map((item) => item.ID);
+        minId = Math.min.apply(Math, ids);
+        if (minId > 0)
+          this.createFac.ID = -1;
+        else
+          this.createFac.ID = minId - 1;
+        this.carViewModel.ListFacility.push(this.createFac);
+      }
+      else {
+        minId = -1;
+        this.lstFacCreate.push(this.createFac);
+        this.carViewModel.ListFacility = this.lstFacCreate;
+      }
+      console.log('minId: ', minId);
+
       console.log('CAR Create: ', this.carViewModel);
       console.log('FAC Create: ', this.carViewModel.ListFacility);
       this.carService.carInfo$.next(this.carViewModel);
 
       this.displayModalGeneral = false;
       this.displayModalDetail = false;
+
+      this.createFac = {} as FacilityModel;
     }
     else {
       this.displayModalGeneral = false;
