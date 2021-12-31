@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfirmationService, MenuItem, Message, MessageService } from 'primeng/api';
+import { ConfirmationService, MenuItem, Message, MessageService, SelectItem } from 'primeng/api';
 import { CarModel } from 'src/app/models/car.model';
 import { DropdownModel } from 'src/app/models/common.model';
-import { FacilityModel } from 'src/app/models/facility.model';
+import { FacilityModel, FacilityTypeModel } from 'src/app/models/facility.model';
 import { CarService } from 'src/app/services/CarService/car.service';
+import { FacilityService } from 'src/app/services/FacilityService/facility.service';
 
 @Component({
   selector: 'app-facility-list',
@@ -25,11 +26,15 @@ export class FacilityListComponent implements OnInit {
   revolvingOptions: DropdownModel[] = [];
   currencys: DropdownModel[] = [];
   units: DropdownModel[] = [];
+  facTypes: FacilityTypeModel[] = [];
+
+  parentFac = {} as FacilityModel[];
 
   createFac = {} as FacilityModel;
   lstFacCreate: FacilityModel[] = [];
 
   constructor(public messageService: MessageService,
+    private facilityService: FacilityService,
     private carService: CarService,
     private confirmationService: ConfirmationService) {
     this.revolvingOptions = [
@@ -49,7 +54,7 @@ export class FacilityListComponent implements OnInit {
       { name: "EUR", code: "EUR" }
     ];
   }
-
+  
   ngOnInit() {
     this.carService.carInfo$.subscribe(data => {
       this.carViewModel = data;
@@ -67,6 +72,11 @@ export class FacilityListComponent implements OnInit {
         }
       }
     ];
+
+    // Dropdown Department
+    this.facilityService.getAllFacilityType().subscribe((data: FacilityTypeModel[]) => {
+      this.facTypes = data;
+    });
   }
 
   confirmDeleteFacility() {
@@ -94,6 +104,11 @@ export class FacilityListComponent implements OnInit {
   }
 
   showPopUpCreateDetailFac() {
+    if (this.carViewModel.ListFacility) {
+      if (this.carViewModel.ListFacility.filter(x => x.PARENT_ID === 0))
+        this.parentFac = this.carViewModel.ListFacility.filter(x => x.PARENT_ID === 0);
+      console.log('Parent: ', this.parentFac);
+    }
     this.createFac.FACILITY_CODE = "FAC.09122021.00041433";
     this.displayModalDetail = true;
     this.displayModalGeneral = false;
@@ -119,8 +134,6 @@ export class FacilityListComponent implements OnInit {
       }
       console.log('minId: ', minId);
 
-      console.log('CAR Create: ', this.carViewModel);
-      console.log('FAC Create: ', this.carViewModel.ListFacility);
       this.carService.carInfo$.next(this.carViewModel);
 
       this.displayModalGeneral = false;

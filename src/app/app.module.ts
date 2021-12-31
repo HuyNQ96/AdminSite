@@ -2,7 +2,7 @@ import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/cor
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 // PrimeNG Library
@@ -87,7 +87,8 @@ import { CustomerMainInfoComponent } from './views/customer/customer-info/custom
     ToastModule,
     DialogModule,
     SelectButtonModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ReactiveFormsModule 
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],

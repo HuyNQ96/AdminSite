@@ -13,10 +13,7 @@
         [model]="items"></p-splitButton>
 </div>
 <p-toast></p-toast>
-<p-confirmDialog
-  [style]="{ width: '50vw' }"
-  [baseZIndex]="10000"
-></p-confirmDialog>
+<p-confirmDialog [style]="{ width: '50vw' }" [baseZIndex]="10000"></p-confirmDialog>
 
 <div class="card">
     <p-table [value]="carViewModel.ListFacility" [paginator]="true" [rows]="10" [showCurrentPageReport]="true"
@@ -48,6 +45,7 @@
     </p-table>
 </div>
 
+<p-toast></p-toast>
 
 <p-dialog header="Thêm hạn mức tổng hợp" [(visible)]="displayModalGeneral" [modal]="true"
     [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
@@ -57,7 +55,8 @@
                 <label class="p-text-bold">Mã Facility</label>
             </div>
             <div class="col-9">
-                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" [(ngModel)]="createFac.FACILITY_CODE" pInputText disabled/>
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text"
+                    [(ngModel)]="createFac.FACILITY_CODE" pInputText disabled />
             </div>
         </div>
         <div class="grid">
@@ -65,16 +64,18 @@
                 <label class="p-text-bold">Mô tả/Mục đích HMTD</label>
             </div>
             <div class="col-9">
-                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" [(ngModel)]="createFac.FACILITY_DESC" placeholder="Nhập mô tả/Mục đích HMTD" pInputText/>
-            </div>  
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" maxlength="3"
+                    [(ngModel)]="createFac.FACILITY_DESC" placeholder="Nhập mô tả/Mục đích HMTD" pInputText />
+            </div>
         </div>
         <div class="grid">
             <div class="col-3">
                 <label class="p-text-bold">Loại hình cấp tín dụng</label>
             </div>
             <div class="col-9">
-                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="currencys"
-                 [(ngModel)]="createFac.FACILITY_TYPE" placeholder="Chọn loại hình cấp tín dụng" optionLabel="name" [showClear]="true"></p-dropdown>
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="facTypes"
+                    [(ngModel)]="createFac.FACILITY_TYPE" placeholder="Chọn loại hình cấp tín dụng"
+                    optionLabel="DESCRIPTION" [showClear]="true"></p-dropdown>
             </div>
         </div>
         <div class="grid">
@@ -82,7 +83,8 @@
                 <label class="p-text-bold">Tính chất hạn mức</label>
             </div>
             <div class="col-9 my-container">
-                <p-selectButton class="p-inputtext-sm" [options]="revolvingOptions" [(ngModel)]="createFac.REVOLVING" optionLabel="name" optionValue="code"></p-selectButton>
+                <p-selectButton class="p-inputtext-sm" [options]="revolvingOptions" [(ngModel)]="createFac.REVOLVING"
+                    optionLabel="name" optionValue="code"></p-selectButton>
             </div>
         </div>
         <div class="grid">
@@ -90,10 +92,13 @@
                 <label class="p-text-bold">Thời hạn cấp tín dụng</label>
             </div>
             <div class="col-6">
-                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" [(ngModel)]="createFac.SUBMIT_TENOR" pInputText placeholder="Nhập thời hạn cấp tín dụng" />
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text"
+                    [(ngModel)]="createFac.SUBMIT_TENOR" pInputText placeholder="Nhập thời hạn cấp tín dụng" />
             </div>
             <div class="col-3">
-                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="units" [(ngModel)]="createFac.SUBMIT_TENOR_UNIT" placeholder="Chọn" optionLabel="name" [showClear]="true"></p-dropdown>
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="units"
+                    [(ngModel)]="createFac.SUBMIT_TENOR_UNIT" placeholder="Chọn" optionLabel="name" [showClear]="true">
+                </p-dropdown>
             </div>
         </div>
         <div class="grid">
@@ -101,10 +106,13 @@
                 <label class="p-text-bold">Số tiền cấp tín dụng</label>
             </div>
             <div class="col-6">
-                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" [(ngModel)]="createFac.FACILITY_LIMIT"  pInputText placeholder="Nhập số tiền cấp tín dụng" />
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text"
+                    [(ngModel)]="createFac.FACILITY_LIMIT" pInputText placeholder="Nhập số tiền cấp tín dụng" />
             </div>
             <div class="col-3">
-                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="currencys" [(ngModel)]="createFac.FACILITY_LIMIT" placeholder="Chọn" optionLabel="name" [showClear]="true"></p-dropdown>
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="currencys"
+                    [(ngModel)]="createFac.FACILITY_LIMIT" placeholder="Chọn" optionLabel="name" [showClear]="true">
+                </p-dropdown>
             </div>
         </div>
         <div class="grid">
@@ -112,7 +120,8 @@
                 <label class="p-text-bold">Số tiền cấp tín dụng không TSBĐ</label>
             </div>
             <div class="col-6">
-                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" [(ngModel)]="createFac.UNSECURE_LIMIT" pInputText placeholder="Nhập số tiền cấp tín dụng" />
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text"
+                    [(ngModel)]="createFac.UNSECURE_LIMIT" pInputText placeholder="Nhập số tiền cấp tín dụng" />
             </div>
             <div class="col-3" [style]="{'text-align':'center'}">
                 <p>VND</p>
@@ -134,40 +143,224 @@
 <p-dialog header="Thêm hạn mức chi tiết" [(visible)]="displayModalDetail" [modal]="true"
     [breakpoints]="{'960px': '75vw', '640px': '100vw'}" [style]="{width: '50vw'}">
     <p-panel header="Thông tin hạn mức">
-        <div class="grid">
-            <div class="col-2">
-                <label class="p-text-bold">Mã hồ sơ</label>
+        <div class="grid" *ngIf="parentFac">
+            <div class="col-3">
+                <label class="p-text-bold">Facility cha</label>
             </div>
-            <div class="col-10">
-                <p class=" p-inputtext-sm">CAR.24122021.02103335</p>
+            <div class="col-9">
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="parentFac" 
+                [(ngModel)]="createFac.PARENT_ID"  placeholder="Chọn Facility cha" optionLabel="FACILITY_DESC" [showClear]="true">
+                </p-dropdown></div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Mã Facility</label>
+            </div>
+            <div class="col-9">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text"
+                    [(ngModel)]="createFac.FACILITY_CODE" pInputText disabled />
             </div>
         </div>
-
         <div class="grid">
-            <div class="col-2">
-                <label class="p-text-bold">Tên khách hàng</label>
+            <div class="col-3">
+                <label class="p-text-bold">Mô tả/Mục đích HMTD</label>
             </div>
-            <div class="col-10">
-                <p class=" p-inputtext-sm">Huy Nguyễn</p>
+            <div class="col-9">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" maxlength="3"
+                    [(ngModel)]="createFac.FACILITY_DESC" placeholder="Nhập mô tả/Mục đích HMTD" pInputText />
             </div>
         </div>
-
         <div class="grid">
-            <div class="col-2">
-                <label class="p-text-bold">Đơn vị/Chi nhánh</label>
+            <div class="col-3">
+                <label class="p-text-bold">Loại hình cấp tín dụng</label>
             </div>
-            <div class="col-10">
-                <p class=" p-inputtext-sm">CN Quảng Ninh</p>
+            <div class="col-9">
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="facTypes"
+                    [(ngModel)]="createFac.FACILITY_TYPE" placeholder="Chọn loại hình cấp tín dụng"
+                    optionLabel="DESCRIPTION" [showClear]="true"></p-dropdown>
             </div>
         </div>
-
         <div class="grid">
-            <div class="col-2">
-                <label class="p-text-bold">Ngày trình hồ sơ</label>
+            <div class="col-3">
+                <label class="p-text-bold">Tính chất hạn mức</label>
             </div>
-            <div class="col-10">
-                <p class=" p-inputtext-sm"></p>
+            <div class="col-9 my-container">
+                <p-selectButton class="p-inputtext-sm" [options]="revolvingOptions" [(ngModel)]="createFac.REVOLVING"
+                    optionLabel="name" optionValue="code"></p-selectButton>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Thời hạn cấp tín dụng</label>
+            </div>
+            <div class="col-6">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text"
+                    [(ngModel)]="createFac.SUBMIT_TENOR" pInputText placeholder="Nhập thời hạn cấp tín dụng" />
+            </div>
+            <div class="col-3">
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="units"
+                    [(ngModel)]="createFac.SUBMIT_TENOR_UNIT" placeholder="Chọn" optionLabel="name" [showClear]="true">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Số tiền cấp tín dụng</label>
+            </div>
+            <div class="col-6">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text"
+                    [(ngModel)]="createFac.FACILITY_LIMIT" pInputText placeholder="Nhập số tiền cấp tín dụng" />
+            </div>
+            <div class="col-3">
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="currencys"
+                    [(ngModel)]="createFac.FACILITY_LIMIT" placeholder="Chọn" optionLabel="name" [showClear]="true">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Số tiền cấp tín dụng không TSBĐ</label>
+            </div>
+            <div class="col-6">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text"
+                    [(ngModel)]="createFac.UNSECURE_LIMIT" pInputText
+                    placeholder="Nhập số tiền cấp tín dụng không TSBĐ" />
+            </div>
+            <div class="col-3" [style]="{'text-align':'center'}">
+                <p>VND</p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Số tiền cấp tín dụng có TSBĐ</label>
+            </div>
+            <div class="col-6">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text"
+                    [(ngModel)]="createFac.SECURE_LIMIT" pInputText placeholder="Nhập số tiền cấp tín dụng có TSBĐ" />
+            </div>
+            <div class="col-3" [style]="{'text-align':'center'}">
+                <p>VND</p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Thời hạn cấp tín dụng</label>
+            </div>
+            <div class="col-6">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text"
+                    [(ngModel)]="createFac.SUBMIT_TENOR" pInputText placeholder="Nhập thời hạn cấp tín dụng" />
+            </div>
+            <div class="col-3">
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="units"
+                    [(ngModel)]="createFac.SUBMIT_TENOR_UNIT" placeholder="Chọn" optionLabel="name" [showClear]="true">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Thời hạn rút vốn</label>
+            </div>
+            <div class="col-6">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text"
+                    [(ngModel)]="createFac.DISBURSEMENT_PERIOD" pInputText placeholder="Nhập thời hạn rút vốn" />
+            </div>
+            <div class="col-3">
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="units"
+                    [(ngModel)]="createFac.DISBURSEMENT_PERIOD_UNIT" placeholder="Chọn" optionLabel="name"
+                    [showClear]="true">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Thời hạn rút vốn lần đầu</label>
+            </div>
+            <div class="col-6">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text"
+                    [(ngModel)]="createFac.FIRST_DISBURSEMENT" pInputText placeholder="Nhập thời hạn rút vốn lần đầu" />
+            </div>
+            <div class="col-3">
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="units"
+                    [(ngModel)]="createFac.FIRST_DISBURSEMENT_UNIT" placeholder="Chọn" optionLabel="name"
+                    [showClear]="true">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Lãi suất/Phí phát hành (%)</label>
+            </div>
+            <div class="col-9">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" maxlength="3"
+                    [(ngModel)]="createFac.SUBMIT_RATE" placeholder="Nhập lãi suất/Phí phát hành (%)" pInputText />
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Số lần rút vốn tối đa</label>
+            </div>
+            <div class="col-9">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" maxlength="3"
+                    [(ngModel)]="createFac.TOTAL_DISBURSEMENT" placeholder="Nhập số lần rút vốn tối đa" pInputText />
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Ngày có hiệu lực</label>
+            </div>
+            <div class="col-9">
+                <p-calendar [style]="{'width':'100%'}" [(ngModel)]="createFac.EFFECTIVE_DATE" [showIcon]="true"
+                    inputId="icon" placeholder="Nhập ngày có hiệu lực"></p-calendar>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Ngày hết hạn</label>
+            </div>
+            <div class="col-9">
+                <p-calendar [style]="{'width':'100%'}" [(ngModel)]="createFac.END_DATE" [showIcon]="true" inputId="icon"
+                    placeholder="Nhập ngày hết hạn"></p-calendar>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Ngày hết hạn rút vốn</label>
+            </div>
+            <div class="col-9">
+                <p-calendar [style]="{'width':'100%'}" [(ngModel)]="createFac.DISBURSEMENT_END_DATE" [showIcon]="true"
+                    inputId="icon" placeholder="Nhập ngày hết hạn rút vốn"></p-calendar>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Doanh số giải ngân tối đa</label>
+            </div>
+            <div class="col-6">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text"
+                    [(ngModel)]="createFac.MAX_DISBURSEMENT" pInputText placeholder="Nhập doanh số giải ngân tối đa" />
+            </div>
+            <div class="col-3" [style]="{'text-align':'center'}">
+                <p>VND</p>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Mục đích vay</label>
+            </div>
+            <div class="col-9">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" pInputText
+                    placeholder="Nhập mục đích vay" />
             </div>
         </div>
     </p-panel>
+    <div style="text-align: center;">
+        <button type="button" label="Lưu thông tin" (click)="SubmitCreateFacilityForm('Add')"
+            class="p-element p-ripple p-button-raised p-button-info p-button-text p-button p-component">
+            <span class="p-button-label">Lưu thông tin</span>
+        </button>
+        <button type="button" label="Thoát" (click)="SubmitCreateFacilityForm('Close')"
+            class="p-element p-ripple p-button-raised p-button-danger p-button-text p-button p-component">
+            <span class="p-button-label">Thoát</span>
+        </button>
+    </div>
 </p-dialog>

@@ -57,3 +57,8 @@ export interface FacilityModel {
     MAX_DISBURSEMENT_AMT: number;
     ListCustomField: CustomFieldModel[];
 }
+export interface FacilityTypeModel {
+    ID: number;
+    FACILITY_TYPE: string;
+    DESCRIPTION: string;
+}

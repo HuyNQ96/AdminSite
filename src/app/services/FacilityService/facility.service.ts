@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { FacilityModel } from 'src/app/models/facility.model';
+import { FacilityModel, FacilityTypeModel } from 'src/app/models/facility.model';
 import { REST_TEST_API } from 'src/app/constants/api.constants';
 
 @Injectable({
@@ -37,6 +37,11 @@ export class FacilityService {
     params = params.append('facId', Id);
     this.httpOptions.params = params;
     return this.httpClient.get<FacilityModel>(url, this.httpOptions);
+  }
+
+  public getAllFacilityType(): Observable<FacilityTypeModel[]> {
+    const url = this.REST_API_SERVICE + '/get_fac_type';
+    return this.httpClient.get<FacilityTypeModel[]>(url, this.httpOptions);
   }
 
 }

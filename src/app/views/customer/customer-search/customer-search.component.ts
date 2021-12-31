@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { CarModel } from 'src/app/models/car.model';
 import { CustomerCategoryModel, CustomerModel, CustomerSearchModel } from 'src/app/models/customer.model';
@@ -12,7 +13,7 @@ import { DepartmentService } from 'src/app/services/DepartmentService/department
   selector: 'app-customer-search',
   templateUrl: './customer-search.component.html',
   styleUrls: ['./customer-search.component.scss'],
-  providers: [MessageService]
+  providers: [MessageService, FormBuilder]
 })
 export class CustomerSearchComponent implements OnInit {
   index: number = 0;
@@ -55,7 +56,6 @@ export class CustomerSearchComponent implements OnInit {
         element.CUST_CAT_FULL_NAME = element.CUST_CAT_CODE + ' - ' + element.CUST_CAT_NAME;
       });
       this.lstCustCat = data;
-      console.log('lstCustCat: ', this.lstCustCat);
     });
 
     // Dropdown Department
