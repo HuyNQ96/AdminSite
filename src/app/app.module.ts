@@ -43,6 +43,7 @@ import { CustomerInfoComponent } from './views/customer/customer-info/customer-i
 import { CustomerSearchComponent } from './views/customer/customer-search/customer-search.component';
 import { CarDetailComponent } from './views/car/car-detail/car-detail.component';
 import { CustomerMainInfoComponent } from './views/customer/customer-info/customer-main-info/customer-main-info/customer-main-info.component';
+import { FacilityFormCreateComponent } from './views/facility/facility-form-create/facility-form-create.component';
 
 @NgModule({
   // Component
@@ -58,7 +59,8 @@ import { CustomerMainInfoComponent } from './views/customer/customer-info/custom
     CustomerInfoComponent,
     CustomerSearchComponent,
     CarDetailComponent,
-    CustomerMainInfoComponent
+    CustomerMainInfoComponent,
+    FacilityFormCreateComponent
   ],
   // Module
   imports: [
