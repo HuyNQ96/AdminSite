@@ -39,11 +39,10 @@ export class FacilityDetailFormCreateComponent implements OnInit {
   revolvingOptions: DropdownModel[] = [];
   lstCurrency: CurrencyModel[] = [];
   lstTimeUnit: TimeUnitModel[] = [];
-  facTypes: FacilityTypeModel[] = [];
-  lstProduct: ProductModel[] = [];
+  
+  facTypes: TreeNode[] = [];
 
-  tree: any;
-  files: TreeNode[] = [];
+  lstProduct: TreeNode[] = [];
 
   // Lưu danh sách Fac được tạo mới
   lstFacCreate: FacilityModel[] = [];
@@ -80,23 +79,20 @@ export class FacilityDetailFormCreateComponent implements OnInit {
       this.carViewModel = data;
     });
 
-    // Dropdown Department
+    // Dropdown FAC TYPE
     this.facilityService.getAllFacilityType().subscribe((data: FacilityTypeModel[]) => {
-      this.facTypes = data;
+      data.forEach((item: FacilityTypeModel) => {
+        if (item.PARENT_ID === 0)
+          this.facTypes.push(this.customConvert.generateTreeStructure(item, data, "ID", "PARENT_ID", "FACILITY_TYPE", "DESCRIPTION"));
+      });
     });
 
     // Dropdown Product
     this.productService.getAllProduct().subscribe((data: ProductModel[]) => {
-      this.lstProduct = data;
-      var root = this.lstProduct.filter(item => item.PARENT_ID === 0)[0];
-      this.tree = data.reduce(this.customConvert.listToTree, {})[root.ID]; // get only the root node ('1')
-      console.log('Data: ', this.tree);
-
       data.forEach((item: ProductModel) => {
         if (!item.PARENT_ID)
-          this.files.push(this.generateTreeStructure(item));
+          this.lstProduct.push(this.customConvert.generateTreeStructure(item, data, "ID", "PARENT_ID", "PRODUCT_CODE", "PRODUCT_NAME"));
       });
-      console.log("File: ", this.files);
     });
 
     this.showPopUpCreateDetailFac();
@@ -104,35 +100,7 @@ export class FacilityDetailFormCreateComponent implements OnInit {
 
   }
 
-  generateTreeStructure(parentNode: ProductModel): TreeNode {
-    let parentNodeChildren: TreeNode[] = [];
-    let item: TreeNode = {
-      label: parentNode.PRODUCT_CODE + ': ' + parentNode.PRODUCT_NAME,
-      data: parentNode.ID,
-      expandedIcon: "fa fa-folder-open",
-      expanded: true,
-      collapsedIcon: "pi pi-arrow-circle-right",
-      children: []
-    };
-    this.lstProduct.forEach(item => {
-      if (parentNode.ID === item.PARENT_ID) {
-        let childNode: TreeNode = {
-          label: item.PRODUCT_CODE + ': ' + item.PRODUCT_NAME,
-          data: item.ID,
-          expandedIcon: "fa fa-folder-open",
-          expanded: true,
-          collapsedIcon: "pi pi-arrow-circle-right",
-          children: []
-        };
-        childNode = this.generateTreeStructure(item);
-        parentNodeChildren.push(childNode);
-      }
-    });
-    if (item.children)
-      item.children.push(...parentNodeChildren);
-    return item;
-  }
-
+  
   showPopUpCreateDetailFac() {
     if (this.carViewModel.ListFacility) {
       if (this.carViewModel.ListFacility.filter(x => x.PARENT_ID === 0))

@@ -27,10 +27,4 @@ export class ProductService {
     const url = this.REST_API_SERVICE + '/get_all_product';
     return this.httpClient.get<ProductModel[]>(url, this.httpOptions);
   }
-  public getAllProductTree() {
-    const url = this.REST_API_SERVICE + '/get_all_product';
-    return this.httpClient.get<any>(url, this.httpOptions)
-      .toPromise()
-      .then(res => <TreeNode[]>res.data);
-  }
 }

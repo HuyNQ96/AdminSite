@@ -42,10 +42,9 @@
                 <label class="p-text-bold">Loại hình cấp tín dụng</label>
             </div>
             <div class="col-9">
-                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="facTypes" [filter]="true"
-                    filterBy="FACILITY_TYPE" formControlName="FACILITY_TYPE" placeholder="Chọn loại hình cấp tín dụng"
-                    optionValue="ID" optionLabel="FACILITY_TYPE"
-                    [showClear]="this.addDetailFacilityForm.value['FACILITY_TYPE']?true:false"></p-dropdown>
+                <p-treeSelect [style]="{'width':'200%'}" [options]="facTypes" formControlName="FACILITY_TYPE"
+                placeholder="Chọn loại hình cấp tín dụng" [filter]="true" filterBy="label" [showClear]="true">
+                </p-treeSelect>
                 <span class="text-danger"
                     *ngIf="(addDetailFacilityFormControl.FACILITY_TYPE.touched || submittedDetail) && addDetailFacilityFormControl.FACILITY_TYPE.errors?.required">
                     Loại hình cấp tín dụng là bắt buộc
@@ -57,7 +56,7 @@
                 <label class="p-text-bold">Sản phẩm tín dụng</label>
             </div>
             <div class="col-9">
-                <p-treeSelect [style]="{'width':'200%'}" [options]="files" formControlName="PRODUCT_ID"
+                <p-treeSelect [style]="{'width':'200%'}" [options]="lstProduct" formControlName="PRODUCT_ID"
                     placeholder="Chọn sản phẩm tín dụng" [filter]="true" filterBy="label" [showClear]="true">
                 </p-treeSelect>
                 <span class="text-danger"
@@ -174,7 +173,8 @@
             <div class="col-3">
                 <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="lstTimeUnit"
                     formControlName="DISBURSEMENT_PERIOD_UNIT" placeholder="Chọn" optionLabel="TIME_UNIT_NAME"
-                    optionValue="TIME_UNIT_CODE" [showClear]="this.addDetailFacilityForm.value['DISBURSEMENT_PERIOD_UNIT']?true:false">
+                    optionValue="TIME_UNIT_CODE"
+                    [showClear]="this.addDetailFacilityForm.value['DISBURSEMENT_PERIOD_UNIT']?true:false">
                 </p-dropdown>
                 <span class="text-danger"
                     *ngIf="(addDetailFacilityFormControl.DISBURSEMENT_PERIOD_UNIT.touched || submittedDetail) && addDetailFacilityFormControl.DISBURSEMENT_PERIOD_UNIT.errors?.required">
@@ -197,7 +197,8 @@
             <div class="col-3">
                 <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="lstTimeUnit"
                     formControlName="FIRST_DISBURSEMENT_UNIT" placeholder="Chọn" optionLabel="TIME_UNIT_NAME"
-                    optionValue="TIME_UNIT_CODE" [showClear]="this.addDetailFacilityForm.value['FIRST_DISBURSEMENT_UNIT']?true:false">
+                    optionValue="TIME_UNIT_CODE"
+                    [showClear]="this.addDetailFacilityForm.value['FIRST_DISBURSEMENT_UNIT']?true:false">
                 </p-dropdown>
                 <span class="text-danger"
                     *ngIf="(addDetailFacilityFormControl.FIRST_DISBURSEMENT_UNIT.touched || submittedDetail) && addDetailFacilityFormControl.FIRST_DISBURSEMENT_UNIT.errors?.required">

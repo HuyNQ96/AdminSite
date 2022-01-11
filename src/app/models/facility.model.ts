@@ -61,4 +61,5 @@ export interface FacilityTypeModel {
     ID: number;
     FACILITY_TYPE: string;
     DESCRIPTION: string;
+    PARENT_ID: number;
 }
