@@ -1,0 +1,22 @@
+button {
+    font-weight: bold !important;
+    margin-left: 5px;
+    margin-bottom: 7px;
+    top: 7px;
+}
+:host ::ng-deep {
+    .p-inputtext {
+        font-size: 14px!important;
+    }
+    li {
+        font-size: 14px!important;
+    }
+    .p-dropdown-items-wrapper{
+        max-width: 620px;
+    }
+    .p-treeselect {
+        font-size: 14px!important;
+        display: inline-flex;
+        width: 100%;
+    }
+}

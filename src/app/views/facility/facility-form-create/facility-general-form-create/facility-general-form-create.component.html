@@ -1,0 +1,135 @@
+<form class="form" [formGroup]="addGeneralFacilityForm" (ngSubmit)="SubmitCreateFacilityForm('Add', 'General')">
+    <p-panel header="Thông tin hạn mức">
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Mã Facility</label>
+            </div>
+            <div class="col-9">
+                <input [style]="{'width':'100%'}" formControlName="FACILITY_CODE" class="p-inputtext-sm" type="text"
+                    pInputText />
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Mô tả/Mục đích HMTD</label>
+            </div>
+            <div class="col-9">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" formControlName="FACILITY_DESC"
+                    placeholder="Nhập mô tả/Mục đích HMTD" pInputText />
+                <span class="text-danger"
+                    *ngIf="(addGeneralFacilityFormControl.FACILITY_DESC.touched || submittedGeneral) && addGeneralFacilityFormControl.FACILITY_DESC.errors?.required">
+                    Mô tả Facility là bắt buộc
+                </span>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Loại hình cấp tín dụng</label>
+            </div>
+            <div class="col-9">
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="facTypes"
+                    placeholder="Chọn loại hình cấp tín dụng" formControlName="FACILITY_TYPE" optionValue="ID"
+                    optionLabel="FACILITY_TYPE"
+                    [showClear]="this.addGeneralFacilityForm.value['FACILITY_TYPE']?true:false"></p-dropdown>
+                <span class="text-danger"
+                    *ngIf="(addGeneralFacilityFormControl.FACILITY_TYPE.touched || submittedGeneral) && addGeneralFacilityFormControl.FACILITY_TYPE.errors?.required">
+                    Loại hình cấp tín dụng là bắt buộc
+                </span>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Tính chất hạn mức</label>
+            </div>
+            <div class="col-9 my-container">
+                <p-selectButton class="p-inputtext-sm" [options]="revolvingOptions" formControlName="REVOLVING"
+                    optionLabel="name" optionValue="code"></p-selectButton>
+                <span class="text-danger"
+                    *ngIf="(addGeneralFacilityFormControl.REVOLVING.touched || submittedGeneral) && addGeneralFacilityFormControl.REVOLVING.errors?.required">
+                    Tính chất hạn mức là bắt buộc
+                </span>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Thời hạn cấp tín dụng</label>
+            </div>
+            <div class="col-6">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" formControlName="SUBMIT_TENOR"
+                    pInputText placeholder="Nhập thời hạn cấp tín dụng" />
+                <span class="text-danger"
+                    *ngIf="(addGeneralFacilityFormControl.SUBMIT_TENOR.touched || submittedGeneral) && addGeneralFacilityFormControl.SUBMIT_TENOR.errors?.required">
+                    Thời hạn cấp tín dụng là bắt buộc
+                </span>
+            </div>
+            <div class="col-3">
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="lstTimeUnit"
+                    formControlName="SUBMIT_TENOR_UNIT" placeholder="Chọn" optionLabel="TIME_UNIT_NAME"
+                    optionValue="TIME_UNIT_CODE"
+                    [showClear]="this.addGeneralFacilityForm.value['SUBMIT_TENOR_UNIT']?true:false">
+                </p-dropdown>
+                <span class="text-danger"
+                    *ngIf="(addGeneralFacilityFormControl.SUBMIT_TENOR_UNIT.touched || submittedGeneral) && addGeneralFacilityFormControl.SUBMIT_TENOR_UNIT.errors?.required">
+                    Đơn vị thời hạn cấp tín dụng là bắt buộc
+                </span>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Số tiền cấp tín dụng</label>
+            </div>
+            <div class="col-6">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" formControlName="FACILITY_LIMIT"
+                    pInputText placeholder="Nhập số tiền cấp tín dụng" />
+                <span class="text-danger"
+                    *ngIf="(addGeneralFacilityFormControl.FACILITY_LIMIT.touched || submittedGeneral) && addGeneralFacilityFormControl.FACILITY_LIMIT.errors?.required">
+                    Số tiền cấp tín dụng là bắt buộc
+                </span>
+                <span class="text-danger"
+                    *ngIf="addGeneralFacilityFormControl.FACILITY_LIMIT.touched && addGeneralFacilityFormControl.FACILITY_LIMIT.errors?.invalidNumber">
+                    Chỉ được nhập số!
+                </span>
+            </div>
+            <div class="col-3">
+                <p-dropdown [style]="{'width':'100%'}" class="p-inputtext-sm" [options]="lstCurrency"
+                    formControlName="CURRENCY_ID" placeholder="Chọn" optionLabel="CCY_CODE" optionValue="ID"
+                    [showClear]="this.addGeneralFacilityForm.value['CURRENCY_ID']?true:false">
+                </p-dropdown>
+                <span class="text-danger"
+                    *ngIf="(addGeneralFacilityFormControl.CURRENCY_ID.touched || submittedGeneral) && addGeneralFacilityFormControl.CURRENCY_ID.errors?.required">
+                    Loại tiền là bắt buộc
+                </span>
+            </div>
+        </div>
+        <div class="grid">
+            <div class="col-3">
+                <label class="p-text-bold">Số tiền cấp tín dụng không TSBĐ</label>
+            </div>
+            <div class="col-6">
+                <input [style]="{'width':'100%'}" class="p-inputtext-sm" type="text" formControlName="UNSECURE_LIMIT"
+                    pInputText placeholder="Nhập số tiền cấp tín dụng" />
+                <span class="text-danger"
+                    *ngIf="(addGeneralFacilityFormControl.UNSECURE_LIMIT.touched || submittedGeneral) && addGeneralFacilityFormControl.UNSECURE_LIMIT.errors?.required">
+                    Số tiền cấp tín dụng không TSBĐ là bắt buộc
+                </span>
+                <span class="text-danger"
+                    *ngIf="addGeneralFacilityFormControl.UNSECURE_LIMIT.touched && addGeneralFacilityFormControl.UNSECURE_LIMIT.errors?.invalidNumber">
+                    Chỉ được nhập số!
+                </span>
+            </div>
+            <div class="col-3" [style]="{'text-align':'center'}">
+                <p>VND</p>
+            </div>
+        </div>
+    </p-panel>
+    <div style="text-align: center;">
+        <button type="button" label="Lưu thông tin" type="submit"
+            class="p-element p-ripple p-button-raised p-button-info p-button-text p-button p-component">
+            <span class="p-button-label">Lưu thông tin</span>
+        </button>
+        <button type="button" label="Thoát" (click)="SubmitCreateFacilityForm('Close','')"
+            class="p-element p-ripple p-button-raised p-button-danger p-button-text p-button p-component">
+            <span class="p-button-label">Thoát</span>
+        </button>
+    </div>
+</form>

@@ -27,6 +27,7 @@ import { ToastModule } from 'primeng/toast';
 import { DialogModule } from 'primeng/dialog';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { TreeSelectModule } from 'primeng/treeselect';
 // Connection
 import { HttpClientModule } from '@angular/common/http';
 
@@ -43,7 +44,8 @@ import { CustomerInfoComponent } from './views/customer/customer-info/customer-i
 import { CustomerSearchComponent } from './views/customer/customer-search/customer-search.component';
 import { CarDetailComponent } from './views/car/car-detail/car-detail.component';
 import { CustomerMainInfoComponent } from './views/customer/customer-info/customer-main-info/customer-main-info/customer-main-info.component';
-import { FacilityFormCreateComponent } from './views/facility/facility-form-create/facility-form-create.component';
+import { FacilityDetailFormCreateComponent } from './views/facility/facility-form-create/facility-detail-form-create/facility-detail-form-create.component';
+import { FacilityGeneralFormCreateComponent } from './views/facility/facility-form-create/facility-general-form-create/facility-general-form-create.component';
 
 @NgModule({
   // Component
@@ -60,7 +62,8 @@ import { FacilityFormCreateComponent } from './views/facility/facility-form-crea
     CustomerSearchComponent,
     CarDetailComponent,
     CustomerMainInfoComponent,
-    FacilityFormCreateComponent
+    FacilityDetailFormCreateComponent,
+    FacilityGeneralFormCreateComponent
   ],
   // Module
   imports: [
@@ -90,7 +93,8 @@ import { FacilityFormCreateComponent } from './views/facility/facility-form-crea
     DialogModule,
     SelectButtonModule,
     ConfirmDialogModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    TreeSelectModule
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent],
